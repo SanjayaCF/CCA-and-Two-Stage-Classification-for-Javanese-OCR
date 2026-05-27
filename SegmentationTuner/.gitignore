@@ -1,0 +1,11 @@
+# Generated test outputs
+static/results/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
+Thumbs.db

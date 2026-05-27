@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Density Labeler</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600;700&family=Noto+Sans+Javanese:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg      : #f0f2f5;
+            --surface : #ffffff;
+            --ink     : #1a1d23;
+            --ink-dim : #6b7280;
+            --border  : #e2e6ea;
+            --accent  : #2563eb;
+            --success : #16a34a;
+            --danger  : #dc2626;
+            --warning : #d97706;
+
+            /* position colours */
+            --pos-base    : #1d4ed8; --pos-base-bg   : #eff6ff;
+            --pos-above   : #15803d; --pos-above-bg  : #f0fdf4;
+            --pos-below   : #c2410c; --pos-below-bg  : #fff7ed;
+            --pos-beside  : #7c3aed; --pos-beside-bg : #f5f3ff;
+            --pos-wrapped : #0e7490; --pos-wrapped-bg: #ecfeff;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: var(--bg);
+            color: var(--ink);
+            font-family: 'IBM Plex Sans', sans-serif;
+            min-height: 100vh;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            user-select: none;
+        }
+
+        /* ── Header ── */
+        .header {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--ink);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .brand .mode-chip {
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            background: var(--accent);
+            color: #fff;
+        }
+        .brand .mode-chip.stage2  { background: #7c3aed; }
+        .brand .mode-chip.review  { background: #d97706; }
+
+        .stats-bar {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .stat-pill {
+            padding: 6px 14px;
+            border-radius: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            font-size: 13px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .stat-pill .num {
+            font-family: 'IBM Plex Mono', monospace;
+            font-weight: 700;
+            color: var(--accent);
+            font-size: 14px;
+        }
+        .stat-pill.valid .num { color: var(--success); }
+        .stat-pill.noise .num { color: var(--danger); }
+
+        /* ── Workspace ── */
+        .workspace {
+            width: 100%;
+            max-width: 1100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        /* ── Line image ── */
+        .line-card {
+            position: relative;
+            width: 100%;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .line-card .meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .line-card .fname {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            color: var(--accent);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .progress-text {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink-dim);
+            white-space: nowrap;
+        }
+        .line-image {
+            display: block;
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            background: #f9fafb;
+        }
+
+        /* Overlay Bounding Boxes */
+        .bbox {
+            position: absolute;
+            border: 2px solid rgba(0, 255, 0, 0.3);
+            pointer-events: none;
+            box-sizing: border-box;
+            transition: all 0.2s ease;
+        }
+
+        .bbox.active {
+            border: 3px solid #ff0000;
+            box-shadow: 0 0 0 2px #fff;
+            z-index: 10;
+        }
+
+        /* ── Crop card ── */
+        .crop-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            width: 100%;
+            max-width: 1100px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+            display: flex;
+            flex-direction: row;
+            align-items: stretch;
+            gap: 24px;
+        }
+
+        /* Left panel: crop image + metadata */
+        .crop-left {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            min-width: 260px;
+            max-width: 320px;
+            flex-shrink: 0;
+        }
+
+        /* Right panel: class buttons + nav */
+        .crop-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            min-width: 0;
+        }
+
+        .crop-header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .crop-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink-dim);
+        }
+        .char-counter {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Position badge */
+        .pos-badge {
+            display: none;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+        .pos-badge.visible { display: inline-block; }
+        .pos-base    { background: var(--pos-base-bg);    color: var(--pos-base); }
+        .pos-above   { background: var(--pos-above-bg);   color: var(--pos-above); }
+        .pos-below   { background: var(--pos-below-bg);   color: var(--pos-below); }
+        .pos-beside  { background: var(--pos-beside-bg);  color: var(--pos-beside); }
+        .pos-wrapped { background: var(--pos-wrapped-bg); color: var(--pos-wrapped); }
+
+        /* Reference crop (Stage 2 — shown when labeling a mark) */
+        .ref-area {
+            display: none;
+            width: 100%;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 14px;
+            background: var(--bg);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+        .ref-area.visible { display: flex; }
+        .ref-area .ref-label {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--ink-dim);
+            white-space: nowrap;
+        }
+        .ref-area img {
+            max-height: 56px;
+            max-width: 120px;
+            object-fit: contain;
+            border-radius: 4px;
+            background: #fff;
+            border: 1px solid var(--border);
+        }
+
+        /* Main crop image */
+        .crop-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            flex: 1;
+            min-height: 120px;
+        }
+        .crop-image {
+            max-height: 220px;
+            max-width: 100%;
+            width: auto;
+            object-fit: contain;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+            transition: transform 0.2s;
+            background: #fff;
+        }
+        .crop-image:hover { transform: scale(1.05); }
+
+        /* Stage 1 — V/N buttons */
+        .stage1-actions {
+            display: flex;
+            gap: 12px;
+            width: 100%;
+        }
+        .btn-valid {
+            flex: 1; padding: 14px;
+            border: 2px solid #bbf7d0;
+            background: #f0fdf4;
+            color: var(--success);
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-valid:hover { background: #dcfce7; border-color: var(--success); transform: translateY(-2px); }
+        .btn-noise {
+            flex: 1; padding: 14px;
+            border: 2px solid #fecaca;
+            background: #fef2f2;
+            color: var(--danger);
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        .btn-noise:hover { background: #fee2e2; border-color: var(--danger); transform: translateY(-2px); }
+
+        /* Stage 2 — class grid */
+        .stage2-actions { display: none; width: 100%; }
+        .stage2-actions.visible { display: block; }
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 8px;
+            width: 100%;
+        }
+        .btn-class {
+            padding: 10px 8px 8px;
+            border: 1.5px solid var(--border);
+            background: #fff;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink);
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+            position: relative;
+        }
+        .btn-class:hover { background: #f0f4ff; border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(37,99,235,0.15); }
+        .btn-class .glyph {
+            font-family: 'Noto Sans Javanese', serif;
+            font-size: 32px;
+            line-height: 1.2;
+            color: var(--ink);
+            min-height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn-class:hover .glyph { color: var(--accent); }
+        .btn-class .cls-name {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.1;
+        }
+        .btn-class .trait {
+            font-size: 9px;
+            font-weight: 400;
+            color: var(--ink-dim);
+            font-family: 'IBM Plex Sans', sans-serif;
+            font-style: italic;
+            line-height: 1.2;
+            text-align: center;
+        }
+        .btn-class .glyph-img {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+            image-rendering: auto;
+        }
+
+        /* Nav row */
+        .nav-row {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+            justify-content: center;
+        }
+        .btn-nav {
+            padding: 9px 16px;
+            border-radius: 8px;
+            border: 1.5px solid var(--border);
+            background: #fff;
+            color: var(--ink-dim);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-nav:hover { background: var(--bg); color: var(--ink); border-color: #9ca3af; }
+        kbd {
+            padding: 2px 5px;
+            border-radius: 4px;
+            border: 1px solid currentColor;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 11px;
+            opacity: 0.7;
+        }
+
+        /* Loader */
+        .loader {
+            position: fixed; inset: 0;
+            background: rgba(240,242,245,0.88);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            gap: 12px;
+            backdrop-filter: blur(3px);
+        }
+        .loader.hidden { display: none; }
+        .spinner {
+            width: 36px; height: 36px;
+            border: 3px solid var(--border);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+        }
+        .loader-text { font-size: 14px; font-weight: 600; color: var(--ink-dim); }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .hidden { display: none !important; }
+
+        /* ── Add-class row ── */
+        .add-class-row {
+            display: flex;
+            gap: 8px;
+            width: 100%;
+            margin-top: 8px;
+            align-items: center;
+        }
+        .new-class-input {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1.5px solid var(--border);
+            border-radius: 8px;
+            font-size: 13px;
+            font-family: 'IBM Plex Mono', monospace;
+            outline: none;
+            color: var(--ink);
+            transition: border-color 0.15s;
+            background: #fff;
+        }
+        .new-class-input:focus { border-color: var(--accent); }
+        .new-class-input::placeholder { color: var(--ink-dim); opacity: 0.7; }
+        .btn-add-class {
+            padding: 8px 14px;
+            border-radius: 8px;
+            border: 1.5px solid var(--accent);
+            background: var(--accent);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.15s;
+            white-space: nowrap;
+        }
+        .btn-add-class:hover { background: #1d4ed8; }
+
+        /* ── Goal Progress Panel ── */
+        #goal-panel {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 1100px;
+        }
+        #goal-panel summary {
+            padding: 11px 20px;
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        #goal-panel summary::-webkit-details-marker { display: none; }
+        #goal-panel summary::after { content: '▾'; margin-left: auto; transition: transform 0.2s; }
+        #goal-panel[open] summary::after { transform: rotate(-180deg); }
+        .goal-panel-body {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            padding: 4px 20px 16px;
+        }
+        .goal-priority { display: flex; flex-direction: column; gap: 7px; }
+        .goal-priority-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--ink-dim);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .p-badge {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 10px;
+            padding: 1px 6px;
+            border-radius: 10px;
+            background: var(--border);
+            color: var(--ink);
+            font-weight: 700;
+        }
+        .p-badge.all-done { background: #dcfce7; color: var(--success); }
+        .goal-row { display: flex; flex-direction: column; gap: 3px; }
+        .goal-row-meta { display: flex; align-items: center; justify-content: space-between; }
+        .goal-row-name {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        .goal-row-name.done { color: var(--success); }
+        .goal-row-count { font-family: 'IBM Plex Mono', monospace; font-size: 11px; color: var(--ink-dim); }
+        .goal-bar-track { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+        .goal-bar-fill { height: 100%; border-radius: 3px; background: var(--accent); transition: width 0.4s ease; }
+        .goal-bar-fill.done { background: var(--success); }
+    </style>
+</head>
+<body>
+
+<div id="loader" class="loader">
+    <div class="spinner"></div>
+    <div class="loader-text">Segmenting…</div>
+</div>
+
+<!-- Header -->
+<header class="header">
+    <div class="brand">
+        Density Labeler
+        <span id="mode-chip" class="mode-chip">stage1</span>
+    </div>
+    <div class="stats-bar" id="stats-bar">
+        <!-- populated by JS -->
+    </div>
+</header>
+
+<!-- Goal progress panel (stage2 only) -->
+<details id="goal-panel" style="display:none;">
+    <summary>Labeling Goals <span id="goal-overall"></span></summary>
+    <div class="goal-panel-body" id="goal-panel-body"></div>
+</details>
+
+<div class="workspace">
+
+    <!-- Line image -->
+    <div class="line-card" id="line-card">
+        <div class="meta">
+            <span class="fname" id="lbl-filename">—</span>
+            <span class="progress-text" id="lbl-progress">— / —</span>
+        </div>
+        <img id="line-image" class="line-image" src="" alt="Line image">
+    </div>
+
+    <!-- Crop labeling card -->
+    <div class="crop-card">
+
+        <!-- LEFT: crop image + metadata -->
+        <div class="crop-left">
+            <div class="crop-header">
+                <span class="crop-title">
+                    Karakter: <span id="char-counter" style="color:var(--accent);font-family:'IBM Plex Mono',monospace;">—</span>
+                </span>
+                <span id="pos-badge" class="pos-badge"></span>
+            </div>
+
+            <!-- Reference base crop (Stage 2 non-base positions) -->
+            <div class="ref-area" id="ref-area">
+                <span class="ref-label">Base ref</span>
+                <img id="ref-image" src="" alt="Base reference">
+            </div>
+
+            <!-- Main crop -->
+            <div class="crop-wrap">
+                <img id="crop-image" class="crop-image" src="" alt="Crop">
+            </div>
+        </div>
+
+        <!-- RIGHT: class buttons + nav -->
+        <div class="crop-right">
+            <!-- Stage 1 buttons -->
+            <div class="stage1-actions" id="stage1-actions">
+                <button class="btn-valid" onclick="saveLabel('valid')">
+                    ✅ Valid <kbd>A</kbd>
+                </button>
+                <button class="btn-noise" onclick="saveLabel('noise')">
+                    ❌ Noise <kbd>S</kbd>
+                </button>
+            </div>
+
+            <!-- Stage 2 / review class grid -->
+            <div class="stage2-actions" id="stage2-actions">
+                <div class="class-grid" id="class-grid"></div>
+                <div class="add-class-row">
+                    <input type="text" id="new-class-input" class="new-class-input"
+                           placeholder="new class name… (Enter to add &amp; label)">
+                    <button class="btn-add-class" onclick="submitNewClass()">+ Add &amp; Label</button>
+                </div>
+            </div>
+
+            <!-- Nav row -->
+            <div class="nav-row">
+                <button class="btn-nav" onclick="navBack()"><kbd>[</kbd> Prev</button>
+                <button class="btn-nav" onclick="skipCurrent()">⏭ Skip <kbd>Space</kbd></button>
+                <button class="btn-nav" onclick="undoAction()">↩ Undo <kbd>Z</kbd></button>
+                <button class="btn-nav" onclick="navForward()">Next <kbd>]</kbd></button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+// ── Config & state ────────────────────────────────────────────────────────────
+let config = {};
+
+let state = {
+    mode       : 'stage1',
+    totalFiles : 0,
+    fileIdx    : 0,
+
+    // Stage 1
+    charIdx    : 0,
+
+    // Stage 2
+    posQueue      : [],  // ['base'] or ['above','below',...] depending on pass
+    posQueueIdx   : 0,
+    labelPass     : 0,   // 0 = base pass, 1 = sandhangan pass
+
+    // Review mode
+    reviewItemIdx    : 0,
+    reviewTotal      : 0,
+    reviewCurrentItem: null,
+
+    currentData : null,
+    history     : [],
+    isProcessing: false,
+};
+
+// ── Javanese Unicode Glyph Mapping ───────────────────────────────────────────
+// Combining marks use dotted circle (◌ U+25CC) as a visible base.
+const GLYPH_MAP = {
+    // Base characters (20 Hanacaraka nglegena)
+    // Using standard Javanese Unicode block (U+A980–U+A9DF)
+    'ha'  : '\uA9B2', 'na'  : '\uA9A4', 'ca'  : '\uA995', 'ra'  : '\uA9AB',
+    'ka'  : '\uA98F', 'da'  : '\uA9A2', 'ta'  : '\uA9A0', 'sa'  : '\uA9B1',
+    'wa'  : '\uA9AE', 'la'  : '\uA9AD', 'pa'  : '\uA9A5', 'dha' : '\uA99D',
+    'ja'  : '\uA997', 'ya'  : '\uA9AA', 'nya' : '\uA99A', 'ma'  : '\uA9A9',
+    'ga'  : '\uA992', 'ba'  : '\uA9A7', 'tha' : '\uA99B', 'nga' : '\uA994',
+    'taling' : '\uA9BA',
+    'tarung' : '\u25CC\uA9B4',
+    'wignyan': '\u25CC\uA983',
+
+    // Pasangan (same glyph as nglegena — label prefix "_" distinguishes them)
+    '_ha' : '\uA9B2',   // pasangan ha → "h"
+    '_sa' : '\uA9B1',   // pasangan sa → "s"
+    '_pa' : '\uA9A5',   // pasangan pa → "p"
+
+    // Sandhangan (marks — 14 classes + 3 pasangan)
+    'wulu'       : '\u25CC\uA9B6',
+    'suku'       : '\u25CC\uA9B8',
+    'pepet'      : '\u25CC\uA9BC',
+    'layar'      : '\u25CC\uA982',
+    'cecak'      : '\u25CC\uA981',
+    'cakra'      : '\u25CC\uA9BD',
+    'cakra_keret': '\u25CC\uA9BD\uA9BC',
+    'cakra_suku' : '\u25CC\uA9BD\uA9B8',
+    'pangkon'    : '\u25CC\uA9C0',
+    'pa_cerek'   : '\uA989',
+    'nga_lelet'  : '\uA98A',
+    'adeg_adeg'  : '\uA9CB',
+    'pada_lingsa': '\uA9C8',
+    'pada_lungsi': '\uA9C9',
+    '_nya': '\uA99A',   // pasangan nya → "ny"
+    '_na' : '\uA9A4',   // pasangan na → "n"
+    '_wa' : '\uA9AE',   // pasangan wa → "w"
+    'unlabeled': '❓',
+};
+
+// ── Trait descriptions (short visual hints to help identify each character) ─────
+// Fill in your own short descriptions below. Leave empty '' to show nothing.
+const TRAIT_MAP = {
+    // Base nglegena
+    'ha'  : 'n ke m bawah', 'na'  : 'n ke n tengah lengkung kanan', 'ca'  : 'n ke n bawah lengkung kiri topi', 'ra'  : 'n',
+    'ka'  : 'n ke m tengah', 'da'  : 'n ke n bawah lengkung kanan', 'ta'  : 'n s n', 'sa'  : 'n ke n bawah lengkung kiri normal',
+    'wa'  : 'n ke n bawah topi', 'la'  : 'm ke n bawah', 'pa'  : 'n ke n bawah', 'dha' : 'n w n',
+    'ja'  : 'n k', 'ya'  : 'n n n', 'nya' : 'n pisah m tanduk', 'ma'  : 'p? ke n',
+    'ga'  : 'm', 'ba'  : 'n pisah n tanduk', 'tha' : 'n ekor pisah i tanduk', 'nga' : 'n pisah i tanduk',
+    'taling' : '', 'tarung' : '', 'wignyan': '',
+    '_ha': '', '_sa': '', '_pa': '',
+    'unlabeled': '❓',
+
+    // Sandhangan
+    'wulu': '', 'suku': '', 'pepet': '',
+    'layar': '', 'cecak': '', 'cakra': '',
+    'cakra_keret': '', 'cakra_suku': '',
+    'pangkon': '', 'pa_cerek': '', 'nga_lelet': '',
+    'adeg_adeg': '', 'pada_lingsa': '', 'pada_lungsi': '',
+    '_nya': '', '_na': '', '_wa': '', 'unlabeled': 'simpan untuk nanti',
+};
+
+// ── DOM ───────────────────────────────────────────────────────────────────────
+const DOM = {
+    loader      : document.getElementById('loader'),
+    lineCard    : document.getElementById('line-card'),
+    lineImage   : document.getElementById('line-image'),
+    cropImage   : document.getElementById('crop-image'),
+    charCounter : document.getElementById('char-counter'),
+    lblFilename : document.getElementById('lbl-filename'),
+    lblProgress : document.getElementById('lbl-progress'),
+    posBadge    : document.getElementById('pos-badge'),
+    refArea     : document.getElementById('ref-area'),
+    refImage    : document.getElementById('ref-image'),
+    statsBar    : document.getElementById('stats-bar'),
+    modeChip    : document.getElementById('mode-chip'),
+    s1Actions   : document.getElementById('stage1-actions'),
+    s2Actions   : document.getElementById('stage2-actions'),
+    classGrid   : document.getElementById('class-grid'),
+};
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+async function boot() {
+    try {
+        const cfgRes  = await fetch('/api/config');
+        config        = await cfgRes.json();
+        state.mode    = config.mode;
+
+        DOM.modeChip.textContent = config.mode;
+        if (config.mode === 'stage2') DOM.modeChip.classList.add('stage2');
+        if (config.mode === 'review') DOM.modeChip.classList.add('review');
+
+        // Show correct action panel
+        if (config.mode === 'stage2' || config.mode === 'review') {
+            DOM.s1Actions.classList.add('hidden');
+            DOM.s2Actions.classList.add('visible');
+        }
+
+        // Review mode: hide line-image panel (we work on individual crops)
+        if (config.mode === 'review') {
+            DOM.lineCard.classList.add('hidden');
+        }
+
+        const initRes  = await fetch('/api/init');
+        const initData = await initRes.json();
+        state.totalFiles  = initData.total_files;
+        state.reviewTotal = initData.total_review_items || 0;
+        renderStats(initData.counts);
+        refreshGoalPanel();
+
+        const prog = initData.progress || {file_idx: 0, char_idx: 0, pos_idx: 0, label_pass: 0};
+
+        if (config.mode === 'review') {
+            await loadReviewItem(prog.file_idx || 0);
+        } else {
+            state.labelPass = prog.label_pass || 0;
+            await loadFile(prog.file_idx, prog.char_idx, prog.pos_idx);
+        }
+    } catch (err) {
+        alert('Cannot connect to server.');
+        console.error(err);
+    }
+}
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+function renderStats(counts) {
+    DOM.statsBar.innerHTML = '';
+
+    if (state.mode === 'stage1') {
+        const v = counts['valid'] || 0;
+        const n = counts['noise'] || 0;
+        DOM.statsBar.innerHTML = `
+            <div class="stat-pill">Files <span class="num">${state.fileIdx + 1}/${state.totalFiles}</span></div>
+            <div class="stat-pill valid">Valid <span class="num">${v}</span></div>
+            <div class="stat-pill noise">Noise <span class="num">${n}</span></div>`;
+    } else if (state.mode === 'review') {
+        let html = `<div class="stat-pill">Item <span class="num">${state.reviewItemIdx + 1} / ${state.reviewTotal}</span></div>`;
+        if (config.review_folder) {
+            const rem = counts[config.review_folder] ?? '?';
+            html += `<div class="stat-pill">Reviewing <span style="color:var(--pos-beside);font-family:'IBM Plex Mono',monospace">${config.review_folder}</span></div>`;
+            html += `<div class="stat-pill">Remaining <span class="num" style="color:var(--warning)">${rem}</span></div>`;
+        } else {
+            const bRem = counts['base/unlabeled']       || 0;
+            const sRem = counts['sandhangan/unlabeled'] || 0;
+            html += `<div class="stat-pill"><span style="color:var(--pos-base)">base</span>&nbsp;unlabeled&nbsp;<span class="num" style="color:var(--danger)">${bRem}</span></div>`;
+            html += `<div class="stat-pill"><span style="color:var(--pos-beside)">sandhangan</span>&nbsp;unlabeled&nbsp;<span class="num" style="color:var(--warning)">${sRem}</span></div>`;
+        }
+        DOM.statsBar.innerHTML = html;
+    } else {
+        // Stage 2: show per-bucket totals (base / sandhangan)
+        const buckets = Object.keys(config.position_classes);
+        const bucketTotals = {};
+        buckets.forEach(bucket => {
+            bucketTotals[bucket] = config.position_classes[bucket].reduce(
+                (s, cls) => s + (counts[`${bucket}/${cls}`] || 0), 0);
+        });
+        const bucketColor = { base: 'var(--pos-base)', sandhangan: 'var(--pos-beside)' };
+        let html = `<div class="stat-pill">Files <span class="num">${state.fileIdx + 1}/${state.totalFiles}</span></div>`;
+        buckets.forEach(bucket => {
+            const col = bucketColor[bucket] || 'var(--ink)';
+            html += `<div class="stat-pill"><span style="color:${col}">${bucket}</span>&nbsp;<span class="num">${bucketTotals[bucket]}</span></div>`;
+        });
+        DOM.statsBar.innerHTML = html;
+    }
+}
+
+function patchStatDelta(labelKey, delta) {
+    // Re-fetch counts for accuracy (avoids stale totals on undo)
+    fetch('/api/init').then(r => r.json()).then(d => renderStats(d.counts));
+}
+
+// ── Navigation helpers ────────────────────────────────────────────────────────
+function navBack() {
+    if (state.mode === 'review') {
+        loadReviewItem(Math.max(0, state.reviewItemIdx - 1));
+    } else {
+        loadFile(Math.max(0, state.fileIdx - 1));
+    }
+}
+function navForward() {
+    if (state.mode === 'review') {
+        loadReviewItem(state.reviewItemIdx + 1);
+    } else {
+        loadFile(state.fileIdx + 1);
+    }
+}
+
+// ── Review mode: load a single unlabeled crop ─────────────────────────────────
+async function loadReviewItem(idx) {
+    if (idx < 0) idx = 0;
+    state.isProcessing = true;
+    DOM.loader.classList.remove('hidden');
+
+    try {
+        const res  = await fetch(`/api/load_review_item?item_idx=${idx}`);
+        const data = await res.json();
+
+        if (data.error === 'no_items') {
+            alert('No unlabeled items found. Run stage2 first to generate unlabeled crops.');
+            return;
+        }
+        if (data.error === 'eof') {
+            alert('All unlabeled items have been labeled!');
+            return;
+        }
+
+        state.reviewItemIdx     = data.item_idx;
+        state.reviewTotal       = data.total;
+        state.reviewCurrentItem = data;
+
+        DOM.lblFilename.textContent = data.fname;
+        DOM.lblProgress.textContent = `${data.remaining} remaining`;
+        DOM.cropImage.src = `data:image/jpeg;base64,${data.b64}`;
+
+        // Bucket badge (reuse pos-badge styling)
+        DOM.posBadge.textContent = data.bucket.toUpperCase();
+        DOM.posBadge.className   = `pos-badge visible pos-${data.bucket === 'base' ? 'base' : 'beside'}`;
+
+        // Hide base reference (not applicable in review mode)
+        DOM.refArea.classList.remove('visible');
+
+        // Character counter repurposed as item counter
+        DOM.charCounter.textContent = `${data.item_idx + 1} / ${data.total}`;
+
+        // Class buttons: exclude 'unlabeled' (pointless to relabel as unlabeled)
+        const classes = (config.position_classes[data.bucket] || []).filter(c => c !== 'unlabeled');
+        renderClassButtons(classes);
+
+        // Save cursor to progress file
+        await fetch('/api/progress', {
+            method : 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body   : JSON.stringify({ file_idx: data.item_idx, char_idx: 0, pos_idx: 0, label_pass: 0 }),
+        });
+
+        patchStatDelta(null, 0);
+
+    } catch (err) {
+        console.error(err);
+        alert('Network error loading review item.');
+    } finally {
+        DOM.loader.classList.add('hidden');
+        state.isProcessing = false;
+    }
+}
+
+// ── Load file ─────────────────────────────────────────────────────────────────
+async function loadFile(idx, restoreCharIdx=0, restorePosIdx=0) {
+    if (idx < 0) idx = 0;
+    if (idx >= state.totalFiles) { alert('Semua file selesai!'); return; }
+
+    state.isProcessing = true;
+    DOM.loader.classList.remove('hidden');
+
+    try {
+        const res  = await fetch(`/api/load_file?file_idx=${idx}`);
+        const data = await res.json();
+
+        if (data.error === 'eof') { alert('Selesai!'); return; }
+        if (data.error === 'segment_failed') {
+            console.warn('Segmentation failed for', data.filename, '— skipping');
+            await loadFile(idx + 1);
+            return;
+        }
+        if (data.error) { alert('Gagal memuat: ' + data.error); return; }
+
+        state.fileIdx    = idx;
+        state.charIdx    = restoreCharIdx;
+        state.posQueue   = [];
+        state.posQueueIdx = restorePosIdx;
+        state.currentData = data;
+
+        DOM.lblFilename.textContent = data.filename;
+        DOM.lblProgress.textContent = `${idx + 1} / ${state.totalFiles}`;
+        DOM.lineImage.src = `data:image/jpeg;base64,${data.image}`;
+
+        DOM.lineImage.onload = () => {
+            document.querySelectorAll('.bbox').forEach(el => el.remove());
+            
+            // Store scaling factors for later use
+            window.imgScaleX = DOM.lineImage.width / data.original_width;
+            window.imgScaleY = DOM.lineImage.height / data.original_height;
+            window.imgOffsetX = DOM.lineImage.offsetLeft;
+            window.imgOffsetY = DOM.lineImage.offsetTop;
+            
+            renderCurrentCrop();
+        };
+
+        patchStatDelta(null, 0);  // refresh stats
+
+    } catch (err) {
+        console.error(err);
+        alert('Network error loading file.');
+    } finally {
+        DOM.loader.classList.add('hidden');
+        state.isProcessing = false;
+    }
+}
+
+// ── Sync Progress ────────────────────────────────────────────────────────────
+async function syncProgress() {
+    try {
+        await fetch('/api/progress', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                file_idx: state.fileIdx,
+                char_idx: state.charIdx,
+                pos_idx: state.posQueueIdx,
+                label_pass: state.labelPass
+            })
+        });
+    } catch (e) {}
+}
+
+// ── Render current crop ───────────────────────────────────────────────────────
+function buildPosQueue(charData) {
+    const allAvailable = config.positions.filter(pos => {
+        const d = charData[pos];
+        return d !== null && d !== undefined && d.b64;
+    });
+
+    // Two-pass flow: pass 0 = base only, pass 1 = sandhangan only
+    let queue;
+    if (state.labelPass === 0) {
+        queue = allAvailable.filter(pos => pos === 'base');
+    } else {
+        queue = allAvailable.filter(pos => pos !== 'base');
+    }
+    console.log(`[buildPosQueue] pass=${state.labelPass}, available:`, allAvailable, '=> queue:', queue);
+    return queue;
+}
+
+function updateBoundingBox() {
+    // Remove old bounding boxes
+    document.querySelectorAll('.bbox').forEach(el => el.remove());
+
+    const data = state.currentData;
+    if (!data || !data.characters) return;
+    const char = data.characters[state.charIdx];
+    if (!char) return;
+
+    // Determine the current crop's bounding box based on mode
+    let currentBox = null;
+    if (state.mode === 'stage1') {
+        if (char['base'] && char['base'].box) {
+            currentBox = char['base'].box;
+        }
+    } else {
+        const pos = state.posQueue[state.posQueueIdx];
+        if (pos && char[pos] && char[pos].box) {
+            currentBox = char[pos].box;
+        }
+    }
+
+    console.log(`[bbox] charIdx=${state.charIdx}, pos=${state.posQueue[state.posQueueIdx] || 'base'}, box=`, currentBox);
+
+    if (currentBox && window.imgScaleX) {
+        // Recalculate offsets in case layout shifted
+        const imgRect = DOM.lineImage.getBoundingClientRect();
+        const parentRect = DOM.lineImage.parentElement.getBoundingClientRect();
+        const offsetX = imgRect.left - parentRect.left;
+        const offsetY = imgRect.top - parentRect.top;
+
+        const [x1, y1, x2, y2] = currentBox;
+        const div = document.createElement('div');
+        div.className = 'bbox active';
+        div.style.left = `${offsetX + (x1 * window.imgScaleX)}px`;
+        div.style.top = `${offsetY + (y1 * window.imgScaleY)}px`;
+        div.style.width = `${(x2 - x1) * window.imgScaleX}px`;
+        div.style.height = `${(y2 - y1) * window.imgScaleY}px`;
+        DOM.lineImage.parentElement.appendChild(div);
+    }
+}
+
+function renderCurrentCrop() {
+    const data = state.currentData;
+    if (!data || !data.characters || data.characters.length === 0) return;
+
+    // Skip to next file if all chars done
+    if (state.charIdx >= data.characters.length) {
+        if (state.mode === 'stage2' && state.labelPass === 0) {
+            // Finished base pass → switch to sandhangan pass, restart from char 0
+            console.log('[stage2] Base pass complete! Switching to sandhangan pass.');
+            state.labelPass = 1;
+            state.charIdx = 0;
+            state.posQueue = [];
+            state.posQueueIdx = 0;
+            renderCurrentCrop();
+            return;
+        }
+        // Either stage1, or sandhangan pass done → next file
+        if (state.mode === 'stage2') {
+            // Reset for next file
+            state.labelPass = 0;
+        }
+        loadFile(state.fileIdx + 1);
+        return;
+    }
+
+    DOM.charCounter.textContent =
+        `${state.charIdx + 1} / ${data.characters.length}`;
+
+    const char = data.characters[state.charIdx];
+
+    if (state.mode === 'stage1') {
+        // Only show base crop
+        const base = char['base'];
+        if (!base) { state.charIdx++; renderCurrentCrop(); return; }
+        DOM.cropImage.src = `data:image/jpeg;base64,${base.b64}`;
+        DOM.posBadge.classList.remove('visible');
+        DOM.refArea.classList.remove('visible');
+
+    } else {
+        // Stage 2: use posQueue to iterate through available positions
+        if (state.posQueue.length === 0) {
+            state.posQueue    = buildPosQueue(char);
+            state.posQueueIdx = 0;
+            console.log(`[stage2] char ${state.charIdx}: built posQueue =`, state.posQueue);
+        }
+
+        if (state.posQueueIdx >= state.posQueue.length) {
+            // Done with this char → next
+            console.log(`[stage2] char ${state.charIdx}: all positions done, advancing to next char`);
+            state.charIdx++;
+            state.posQueue    = [];
+            state.posQueueIdx = 0;
+            renderCurrentCrop();
+            return;
+        }
+
+        const pos      = state.posQueue[state.posQueueIdx];
+        const cropData = char[pos];
+        console.log(`[stage2] char ${state.charIdx}, pos ${state.posQueueIdx}/${state.posQueue.length}: showing '${pos}'`);
+
+        if (!cropData || !cropData.b64) {
+            console.warn(`[stage2] SKIP: no data for pos '${pos}' in char ${state.charIdx}`);
+            state.posQueueIdx++;
+            renderCurrentCrop();
+            return;
+        }
+
+        // Position badge
+        DOM.posBadge.textContent  = pos.toUpperCase();
+        DOM.posBadge.className    = `pos-badge visible pos-${pos}`;
+
+        // Main crop
+        DOM.cropImage.src = `data:image/jpeg;base64,${cropData.b64}`;
+
+        // Reference base crop when labeling a mark
+        if (pos !== 'base' && char['base'] && char['base'].b64) {
+            DOM.refImage.src = `data:image/jpeg;base64,${char['base'].b64}`;
+            DOM.refArea.classList.add('visible');
+        } else {
+            DOM.refArea.classList.remove('visible');
+        }
+
+        // Rebuild class buttons for this position using bucket mapping
+        const bucket = config.position_group[pos];
+        renderClassButtons(config.position_classes[bucket]);
+
+        // Update char counter with position + pass hint
+        const passLabel = state.labelPass === 0 ? 'BASE' : 'SANDHANGAN';
+        DOM.charCounter.textContent =
+            `${state.charIdx + 1}/${data.characters.length}  ·  ${passLabel}  ·  ${state.posQueueIdx + 1}/${state.posQueue.length} marks`;
+    }
+
+    // Update bounding box for current position
+    updateBoundingBox();
+    syncProgress();
+}
+
+function renderClassButtons(classes) {
+    DOM.classGrid.innerHTML = '';
+    const imgMap = config.glyph_images || {};
+    classes.forEach((cls, i) => {
+        const btn = document.createElement('button');
+        btn.className = 'btn-class';
+        const trait = TRAIT_MAP[cls] || '';
+
+        if (imgMap[cls]) {
+            btn.innerHTML = `<img class="glyph-img" src="${imgMap[cls]}" alt="${cls}"><span class="cls-name">${cls}</span>${trait ? `<span class="trait">${trait}</span>` : ''}`;
+        } else {
+            const glyph = GLYPH_MAP[cls] || '?';
+            btn.innerHTML = `<span class="glyph">${glyph}</span><span class="cls-name">${cls}</span>${trait ? `<span class="trait">${trait}</span>` : ''}`;
+        }
+        btn.onclick = () => saveLabel(cls);
+        DOM.classGrid.appendChild(btn);
+    });
+}
+
+// ── Save label ────────────────────────────────────────────────────────────────
+async function saveLabel(label) {
+    if (state.isProcessing) return;
+
+    // ── Review mode ──────────────────────────────────────────────────────────
+    if (state.mode === 'review') {
+        if (!state.reviewCurrentItem) return;
+        const item = state.reviewCurrentItem;
+        const snap = { reviewItemIdx: state.reviewItemIdx };
+
+        try {
+            const res  = await fetch('/api/save', {
+                method : 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body   : JSON.stringify({
+                    mode       : 'review',
+                    bucket     : item.bucket,
+                    disk_path  : item.disk_path,
+                    class_label: label,
+                }),
+            });
+            const resp = await res.json();
+            state.history.push({
+                saved_path  : resp.saved_path,
+                src_path    : item.disk_path,   // original unlabeled path (for undo restore)
+                snap,
+                label_key   : resp.label_key,
+            });
+            applyGlyphIfNew(resp);
+            patchStatDelta(resp.label_key, +1);
+            refreshGoalPanel();
+        } catch (err) {
+            console.error('Save failed', err);
+        }
+
+        // Advance cursor — for moved files the server skips the (now missing) slot;
+        // for same-class saves (file unchanged) +1 is necessary to actually move forward.
+        await loadReviewItem(state.reviewItemIdx + 1);
+        return;
+    }
+
+    // ── Stage 1 / Stage 2 ────────────────────────────────────────────────────
+    if (!state.currentData) return;
+
+    const data = state.currentData;
+    const char = data.characters[state.charIdx];
+
+    let disk_path, payload;
+
+    if (state.mode === 'stage1') {
+        if (!char['base']) return;
+        disk_path = char['base'].disk_path;
+        payload   = {
+            filename : data.filename,
+            char_idx : state.charIdx,
+            disk_path,
+            label,
+        };
+    } else {
+        const pos  = state.posQueue[state.posQueueIdx];
+        const crop = char[pos];
+        if (!crop) return;
+        disk_path = crop.disk_path;
+        payload   = {
+            filename   : data.filename,
+            char_idx   : state.charIdx,
+            disk_path,
+            position   : pos,
+            class_label: label,
+        };
+    }
+
+    // Snapshot state BEFORE advancing (needed for undo)
+    const snap = {
+        fileIdx    : state.fileIdx,
+        charIdx    : state.charIdx,
+        posQueueIdx: state.posQueueIdx,
+        posQueue   : [...state.posQueue],
+        labelPass  : state.labelPass,
+    };
+
+    // Advance UI immediately
+    advanceState();
+    renderCurrentCrop();
+
+    // Save asynchronously
+    try {
+        const res  = await fetch('/api/save', {
+            method : 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body   : JSON.stringify(payload),
+        });
+        const resp = await res.json();
+
+        state.history.push({ saved_path: resp.saved_path, snap, label_key: resp.label_key });
+        applyGlyphIfNew(resp);
+        patchStatDelta(resp.label_key, +1);
+        refreshGoalPanel();
+
+    } catch (err) {
+        console.error('Save failed', err);
+    }
+}
+
+function advanceState() {
+    if (state.mode === 'stage1') {
+        state.charIdx++;
+    } else {
+        state.posQueueIdx++;
+    }
+}
+
+// ── Skip ──────────────────────────────────────────────────────────────────────
+function skipCurrent() {
+    if (state.isProcessing) return;
+    if (state.mode === 'review') {
+        loadReviewItem(state.reviewItemIdx + 1);
+        return;
+    }
+    if (!state.currentData) return;
+    advanceState();
+    renderCurrentCrop();
+}
+
+// ── Undo ──────────────────────────────────────────────────────────────────────
+async function undoAction() {
+    if (state.history.length === 0 || state.isProcessing) return;
+
+    const last = state.history.pop();
+
+    // Review mode: move file back to unlabeled
+    if (state.mode === 'review') {
+        try {
+            await fetch('/api/undo', {
+                method : 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body   : JSON.stringify({ path: last.saved_path, restore_path: last.src_path }),
+            });
+        } catch (err) {
+            console.error('Undo failed', err);
+        }
+        patchStatDelta(last.label_key, -1);
+        await loadReviewItem(last.snap.reviewItemIdx);
+        return;
+    }
+
+    // Stage 1 / Stage 2
+    try {
+        await fetch('/api/undo', {
+            method : 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body   : JSON.stringify({ path: last.saved_path }),
+        });
+    } catch (err) {
+        console.error('Undo failed', err);
+    }
+
+    if (last.snap.fileIdx !== undefined && last.snap.fileIdx !== state.fileIdx) {
+        state.labelPass = last.snap.labelPass ?? state.labelPass;
+        await loadFile(last.snap.fileIdx, last.snap.charIdx, last.snap.posQueueIdx);
+    } else {
+        // Restore cursor state
+        state.charIdx     = last.snap.charIdx;
+        state.posQueueIdx = last.snap.posQueueIdx;
+        state.labelPass   = last.snap.labelPass ?? state.labelPass;
+        if (last.snap.posQueue) state.posQueue = last.snap.posQueue;
+        renderCurrentCrop();
+    }
+
+    patchStatDelta(last.label_key, -1);
+}
+
+// ── Keyboard shortcuts ────────────────────────────────────────────────────────
+window.addEventListener('keydown', e => {
+    if (state.isProcessing) return;
+    const key = e.key.toLowerCase();
+
+    // Stage 1
+    if (state.mode === 'stage1') {
+        if (key === 'a' || e.key === 'ArrowLeft')  { saveLabel('valid'); return; }
+        if (key === 's' || e.key === 'ArrowRight') { saveLabel('noise'); return; }
+    }
+
+    // Stage 2 — number keys 1–9 for class selection
+    if (state.mode === 'stage2') {
+        const num = parseInt(e.key);
+        if (num >= 1 && num <= 9 && state.posQueue.length > 0) {
+            const pos     = state.posQueue[state.posQueueIdx];
+            const bucket  = config.position_group[pos];
+            const classes = config.position_classes[bucket];
+            if (classes && num <= classes.length) {
+                saveLabel(classes[num - 1]);
+                return;
+            }
+        }
+    }
+
+    // Review — number keys 1–9 for class selection
+    if (state.mode === 'review' && state.reviewCurrentItem) {
+        const num = parseInt(e.key);
+        if (num >= 1 && num <= 9) {
+            const classes = (config.position_classes[state.reviewCurrentItem.bucket] || []).filter(c => c !== 'unlabeled');
+            if (num <= classes.length) { saveLabel(classes[num - 1]); return; }
+        }
+    }
+
+    // Shared
+    if (key === ' ' || e.key === 'Spacebar') { e.preventDefault(); skipCurrent(); }
+    if (key === 'z')                          { undoAction(); }
+    if (key === '[')                          { navBack(); }
+    if (key === ']')                          { navForward(); }
+});
+
+// ── Glyph auto-update ────────────────────────────────────────────────────────
+function applyGlyphIfNew(resp) {
+    if (!resp.glyph_created) return;
+    // Extract "cls" from "/glyph_images/{bucket}/{cls}.png"
+    const cls = resp.glyph_created.split('/').pop().replace('.png', '');
+    // Cache-bust so the browser doesn't show a stale placeholder
+    config.glyph_images[cls] = resp.glyph_created + '?t=' + Date.now();
+}
+
+// ── Add new class ─────────────────────────────────────────────────────────────
+async function submitNewClass() {
+    const input   = document.getElementById('new-class-input');
+    const rawName = input.value.trim().toLowerCase().replace(/\s+/g, '_');
+    if (!rawName) return;
+
+    if (!/^[a-z0-9_]+$/.test(rawName)) {
+        alert('Class name must contain only letters, numbers, and underscores.');
+        return;
+    }
+
+    // Determine bucket from current mode
+    let bucket;
+    if (state.mode === 'review') {
+        if (!state.reviewCurrentItem) return;
+        bucket = state.reviewCurrentItem.bucket;
+    } else if (state.mode === 'stage2') {
+        const pos = state.posQueue[state.posQueueIdx];
+        if (!pos) return;
+        bucket = config.position_group[pos];
+    } else {
+        return;
+    }
+
+    try {
+        const res  = await fetch('/api/add_class', {
+            method : 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body   : JSON.stringify({ bucket, class_name: rawName }),
+        });
+        const resp = await res.json();
+        if (resp.error) { alert('Error: ' + resp.error); return; }
+
+        // Merge into client-side config so buttons refresh on next render
+        if (!config.position_classes[bucket].includes(rawName)) {
+            const ulIdx = config.position_classes[bucket].indexOf('unlabeled');
+            if (ulIdx >= 0) {
+                config.position_classes[bucket].splice(ulIdx, 0, rawName);
+            } else {
+                config.position_classes[bucket].push(rawName);
+            }
+        }
+
+        input.value = '';
+        await saveLabel(rawName);   // label current crop with the new class immediately
+
+    } catch (err) {
+        console.error('Add class failed', err);
+        alert('Failed to add class.');
+    }
+}
+
+// Enter key triggers add-class submission (but not when focus is elsewhere)
+document.getElementById('new-class-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') { e.preventDefault(); submitNewClass(); }
+    e.stopPropagation();   // prevent [ ] space shortcuts from firing while typing
+});
+
+// ── Goal progress panel ───────────────────────────────────────────────────────
+async function refreshGoalPanel() {
+    if (state.mode !== 'stage2') return;
+    try {
+        const res  = await fetch('/api/goal_progress');
+        const data = await res.json();
+        renderGoalPanel(data);
+        document.getElementById('goal-panel').style.display = '';
+    } catch (e) {}
+}
+
+function renderGoalPanel(data) {
+    const totalDone  = data.priorities.reduce((a, p) => a + p.done, 0);
+    const totalGoals = data.priorities.reduce((a, p) => a + p.total, 0);
+    document.getElementById('goal-overall').textContent = `${totalDone}/${totalGoals} done`;
+
+    document.getElementById('goal-panel-body').innerHTML = data.priorities.map(p => {
+        const allDone = p.done === p.total;
+        const rows = p.classes.map(c => {
+            const pct = Math.min(100, Math.round(c.current / c.goal * 100));
+            return `<div class="goal-row">
+                <div class="goal-row-meta">
+                    <span class="goal-row-name${c.done ? ' done' : ''}">${c.done ? '✓ ' : ''}${c.name}</span>
+                    <span class="goal-row-count">${c.current}/${c.goal}</span>
+                </div>
+                <div class="goal-bar-track">
+                    <div class="goal-bar-fill${c.done ? ' done' : ''}" style="width:${pct}%"></div>
+                </div>
+            </div>`;
+        }).join('');
+        return `<div class="goal-priority">
+            <div class="goal-priority-title">
+                ${p.label}
+                <span class="p-badge${allDone ? ' all-done' : ''}">${p.done}/${p.total}</span>
+            </div>
+            ${rows}
+        </div>`;
+    }).join('');
+}
+
+// ── Start ─────────────────────────────────────────────────────────────────────
+boot();
+</script>
+</body>
+</html>

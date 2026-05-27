@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OCR Pipeline Aksara Jawa</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Javanese&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="main-container">
+
+    <!-- Upload -->
+    <div class="upload-column column">
+        <h1>OCR Pipeline Aksara Jawa</h1>
+        <form id="upload-form">
+            <p>Segmentasi density-guided + klasifikasi Stage 1 (valid aksara vs noise).</p>
+            <label for="file-input" class="file-label" id="file-label">
+                <span>Pilih file gambar baris aksara</span>
+                <div id="file-name"></div>
+            </label>
+            <input type="file" id="file-input" name="file" accept="image/png,image/jpeg,image/jpg">
+            <button type="submit" id="submit-button">Proses Gambar</button>
+        </form>
+        <div class="spinner" id="spinner"></div>
+        <div id="status"></div>
+    </div>
+
+    <!-- Segmentation steps -->
+    <div class="segmentation-steps-container column" id="steps-container" style="display:none;">
+        <div class="steps-header">
+            <h2>Langkah-langkah Segmentasi</h2>
+            <button type="button" id="reset-btn" class="reset-btn">Reset Parameter</button>
+        </div>
+
+        <div class="steps-gallery">
+            <!-- Step 1: Original -->
+            <div class="step-row">
+                <div class="step-image">
+                    <p class="description">Gambar Asli</p>
+                    <img id="img-original" src="" alt="Original">
+                </div>
+                <div class="step-params">
+                    <p class="param-info">Input gambar baris aksara Jawa.</p>
+                </div>
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <!-- Step 2: Binary -->
+            <div class="step-row">
+                <div class="step-image">
+                    <p class="description">Binarisasi + Morphological Closing</p>
+                    <img id="img-binary" src="" alt="Binary">
+                </div>
+                <div class="step-params">
+                    <label class="param-label">Threshold
+                        <input type="range" id="param-threshold" min="0" max="255" value="160">
+                        <span id="value-threshold" class="param-value">160</span>
+                    </label>
+                    <label class="param-label">Kernel Size
+                        <input type="range" id="param-kernel" min="1" max="15" step="2" value="3">
+                        <span id="value-kernel" class="param-value">3</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <!-- Step 3: Density profile + Zone guidance -->
+            <div class="dual-step-row">
+                <div class="step-image">
+                    <p class="description">Profil Densitas Horizontal</p>
+                    <img id="img-density_profile" src="" alt="Density Profile">
+                </div>
+                <div class="step-image">
+                    <p class="description">Zona Utama (Hijau) &amp; Cut Lines (Merah)</p>
+                    <img id="img-zone_guidance" src="" alt="Zone Guidance">
+                </div>
+            </div>
+            <div class="step-row" style="border:none;background:transparent;padding:0 15px;">
+                <div class="step-params" style="flex:1;min-width:100%;">
+                    <label class="param-label">Main Zone Ratio
+                        <input type="range" id="param-main-zone-ratio" min="20" max="80" value="55">
+                        <span id="value-main-zone-ratio" class="param-value">0.55</span>
+                    </label>
+                    <label class="param-label">Valley Ratio
+                        <input type="range" id="param-valley-ratio" min="5" max="50" value="22">
+                        <span id="value-valley-ratio" class="param-value">0.22</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <!-- Step 4: CCA -->
+            <div class="step-row">
+                <div class="step-image">
+                    <p class="description">CCA: Deteksi Komponen</p>
+                    <img id="img-components_with_boxes" src="" alt="CCA Components">
+                </div>
+                <div class="step-params">
+                    <label class="param-label">Min Area
+                        <input type="range" id="param-min-area" min="1" max="200" value="15">
+                        <span id="value-min-area" class="param-value">15</span>
+                    </label>
+                    <p class="param-info">Connected Component Analysis 8-connectivity. Komponen di bawah min area dibuang.</p>
+                </div>
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <!-- Step 5: Anchor vs Secondary classification -->
+            <div class="step-row">
+                <div class="step-image">
+                    <p class="description">Klasifikasi Anchor (Hijau) vs Secondary (Kuning)</p>
+                    <img id="img-classification" src="" alt="Anchor vs Secondary">
+                </div>
+                <div class="step-params">
+                    <label class="param-label">Anchor Overlap Ratio
+                        <input type="range" id="param-anchor-overlap" min="10" max="80" value="35">
+                        <span id="value-anchor-overlap" class="param-value">0.35</span>
+                    </label>
+                    <label class="param-label">Min Anchor Area Ratio
+                        <input type="range" id="param-anchor-area" min="10" max="100" value="50">
+                        <span id="value-anchor-area" class="param-value">0.50</span>
+                    </label>
+                    <p class="param-info">Anchor: komponen yang cukup besar dan tumpang tindih dengan zona utama, dianggap huruf pokok (Hanacaraka). Secondary: sandhangan dan fragmen kecil.</p>
+                </div>
+            </div>
+
+            <div class="arrow">↓</div>
+
+            <!-- Step 6: Final grouped boxes -->
+            <div class="step-row">
+                <div class="step-image">
+                    <p class="description">Density-Guided Grouping (Final)</p>
+                    <img id="img-final_boxes" src="" alt="Final Groups">
+                </div>
+                <div class="step-params">
+                    <label class="param-label">Main Merge Gap (px)
+                        <input type="range" id="param-merge-gap" min="1" max="30" value="6">
+                        <span id="value-merge-gap" class="param-value">6</span>
+                    </label>
+                    <label class="param-label">Attachment H-Gap Ratio
+                        <input type="range" id="param-h-gap" min="10" max="100" value="60">
+                        <span id="value-h-gap" class="param-value">0.60</span>
+                    </label>
+                    <label class="param-label">Attachment V-Gap Ratio
+                        <input type="range" id="param-v-gap" min="10" max="120" value="75">
+                        <span id="value-v-gap" class="param-value">0.75</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Debug info -->
+        <div id="debug-section" style="display:none;margin-top:20px;">
+            <h3 style="margin:0 0 8px;font-size:14px;color:#6c757d;">Debug Info</h3>
+            <div class="debug-panel" id="debug-panel"></div>
+        </div>
+    </div>
+
+    <!-- Per-character results -->
+    <div id="results-section" class="column" style="display:none;">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
+            <h2 style="margin:0;">Hasil per Karakter <span id="char-count" class="char-count"></span></h2>
+            <div style="display:flex;flex-direction:column;gap:6px;align-items:flex-end;">
+                <div id="stage1-banner" style="display:none;padding:6px 12px;border-radius:6px;font-size:12px;"></div>
+                <div id="stage2-banner" style="display:none;padding:6px 12px;border-radius:6px;font-size:12px;"></div>
+            </div>
+        </div>
+
+        <!-- Summary counts -->
+        <div class="results-summary" id="results-summary" style="display:none;">
+            <span class="summary-badge summary-valid"  id="count-valid"></span>
+            <span class="summary-badge summary-noise"  id="count-noise"></span>
+        </div>
+
+        <!-- Pipeline cards (one per character) -->
+        <div id="pipeline-cards"></div>
+
+        <!-- Final composed text -->
+        <div id="final-text-section" class="final-text-section" style="display:none;">
+            <h3>Teks Keseluruhan</h3>
+            <div class="final-comparison">
+                <div class="final-original">
+                    <p class="final-col-label">Gambar Asli</p>
+                    <img id="final-original-img" src="" alt="Gambar Asli">
+                </div>
+                <div class="final-stage-block">
+                    <p class="final-col-label">Aksara Jawa</p>
+                    <div class="final-unicode" id="final-unicode"></div>
+                </div>
+                <div class="final-stage-block final-stage-before">
+                    <p class="final-col-label">Transliterasi Sebelum Aturan</p>
+                    <div class="final-latin" id="final-latin-raw"></div>
+                </div>
+                <div class="final-rule-arrow">&#8595; aturan lintas karakter diterapkan</div>
+                <div class="final-stage-block final-stage-after">
+                    <p class="final-col-label">Transliterasi Sesudah Aturan</p>
+                    <div class="final-latin" id="final-latin"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+// ─── DOM ───
+const form           = document.getElementById('upload-form');
+const fileInput      = document.getElementById('file-input');
+const fileNameDiv    = document.getElementById('file-name');
+const submitBtn      = document.getElementById('submit-button');
+const spinner        = document.getElementById('spinner');
+const statusDiv      = document.getElementById('status');
+const stepsContainer = document.getElementById('steps-container');
+const resultsSection   = document.getElementById('results-section');
+const pipelineCards    = document.getElementById('pipeline-cards');
+const resetBtn         = document.getElementById('reset-btn');
+const charCount        = document.getElementById('char-count');
+const debugSection     = document.getElementById('debug-section');
+const debugPanel       = document.getElementById('debug-panel');
+const stage1Banner     = document.getElementById('stage1-banner');
+const stage2Banner     = document.getElementById('stage2-banner');
+const resultsSummary   = document.getElementById('results-summary');
+const countValid       = document.getElementById('count-valid');
+const countNoise       = document.getElementById('count-noise');
+const finalTextSection = document.getElementById('final-text-section');
+const finalUnicode     = document.getElementById('final-unicode');
+const finalLatin       = document.getElementById('final-latin');
+const finalLatinRaw    = document.getElementById('final-latin-raw');
+const finalOrigImg     = document.getElementById('final-original-img');
+
+// ─── Sliders ───
+const SLIDERS = {
+    'threshold':       { default: 160, format: v => v },
+    'kernel':          { default: 3,   format: v => v },
+    'main-zone-ratio': { default: 55,  format: v => (v / 100).toFixed(2) },
+    'valley-ratio':    { default: 22,  format: v => (v / 100).toFixed(2) },
+    'min-area':        { default: 15,  format: v => v },
+    'anchor-overlap':  { default: 35,  format: v => (v / 100).toFixed(2) },
+    'anchor-area':     { default: 50,  format: v => (v / 100).toFixed(2) },
+    'merge-gap':       { default: 6,   format: v => v },
+    'h-gap':           { default: 60,  format: v => (v / 100).toFixed(2) },
+    'v-gap':           { default: 75,  format: v => (v / 100).toFixed(2) },
+};
+Object.keys(SLIDERS).forEach(name => {
+    const d = SLIDERS[name];
+    d.slider  = document.getElementById('param-' + name);
+    d.display = document.getElementById('value-' + name);
+});
+
+let hasImage = false;
+let debounceTimer = null;
+
+// ─── File selection ───
+fileInput.addEventListener('change', () => {
+    fileNameDiv.textContent = fileInput.files.length ? fileInput.files[0].name : '';
+    if (fileInput.files.length)
+        document.getElementById('file-label').style.borderColor = '#28a745';
+});
+
+// ─── Slider listeners ───
+Object.keys(SLIDERS).forEach(name => {
+    SLIDERS[name].slider.addEventListener('input', () => {
+        SLIDERS[name].display.textContent = SLIDERS[name].format(SLIDERS[name].slider.value);
+        if (hasImage) {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(reprocess, 400);
+        }
+    });
+});
+
+// ─── Collect params ───
+function currentParams() {
+    return {
+        threshold:                       parseInt(SLIDERS['threshold'].slider.value),
+        kernel_size:                     parseInt(SLIDERS['kernel'].slider.value),
+        min_area:                        parseInt(SLIDERS['min-area'].slider.value),
+        main_zone_ratio:                 parseInt(SLIDERS['main-zone-ratio'].slider.value) / 100,
+        valley_ratio:                    parseInt(SLIDERS['valley-ratio'].slider.value) / 100,
+        anchor_overlap_ratio:            parseInt(SLIDERS['anchor-overlap'].slider.value) / 100,
+        min_anchor_area_ratio:           parseInt(SLIDERS['anchor-area'].slider.value) / 100,
+        main_merge_gap:                  parseInt(SLIDERS['merge-gap'].slider.value),
+        attachment_horizontal_gap_ratio: parseInt(SLIDERS['h-gap'].slider.value) / 100,
+        attachment_vertical_gap_ratio:   parseInt(SLIDERS['v-gap'].slider.value) / 100,
+    };
+}
+
+// ─── Submit ───
+form.addEventListener('submit', async e => {
+    e.preventDefault();
+    if (!fileInput.files || !fileInput.files.length) {
+        showStatus('Pilih file terlebih dahulu.', 'error'); return;
+    }
+    const fd = new FormData();
+    fd.append('file', fileInput.files[0]);
+    const p = currentParams();
+    Object.entries(p).forEach(([k, v]) => fd.append(k, v));
+
+    setLoading(true);
+    stepsContainer.style.display = 'none';
+    resultsSection.style.display = 'none';
+
+    try {
+        const res  = await fetch('/process', { method: 'POST', body: fd });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Server error');
+        displayResults(data);
+        showStatus('Berhasil diproses.', 'success');
+        stepsContainer.style.display = 'block';
+        resultsSection.style.display = 'block';
+        hasImage = true;
+    } catch (err) {
+        showStatus('Error: ' + err.message, 'error');
+    } finally {
+        setLoading(false);
+    }
+});
+
+// ─── Reprocess ───
+async function reprocess() {
+    if (!hasImage) return;
+    setImagesLoading(true);
+    try {
+        const res  = await fetch('/reprocess', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(currentParams()),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Gagal reprocess');
+        displayResults(data);
+        showStatus('Parameter diperbarui.', 'success');
+    } catch (err) {
+        showStatus('Error: ' + err.message, 'error');
+    } finally {
+        setImagesLoading(false);
+    }
+}
+
+// ─── Reset ───
+resetBtn.addEventListener('click', () => {
+    Object.keys(SLIDERS).forEach(name => {
+        SLIDERS[name].slider.value = SLIDERS[name].default;
+        SLIDERS[name].display.textContent = SLIDERS[name].format(SLIDERS[name].default);
+    });
+    if (hasImage) reprocess();
+    showStatus('Parameter direset.', 'success');
+});
+
+// ─── Display ───
+function displayResults(data) {
+    const ts = '?t=' + Date.now();
+
+    // Step images
+    if (data.steps) {
+        for (const key in data.steps) {
+            const el = document.getElementById('img-' + key);
+            if (el && data.steps[key]) el.src = '/' + data.steps[key] + ts;
+        }
+    }
+
+    // Stage 1 banner
+    if (data.stage1_available) {
+        stage1Banner.style.display = 'none';
+    } else {
+        stage1Banner.style.cssText = 'display:block;padding:6px 12px;border-radius:6px;font-size:12px;background:#fff3cd;border:1px solid #ffc107;color:#856404;';
+        stage1Banner.textContent = 'Stage 1 tidak tersedia: ' + (data.stage1_error || 'model belum disync');
+    }
+
+    // Stage 2 banner
+    const s2st    = data.stage2_status || {};
+    const s2base  = s2st.base         || {};
+    const s2sandh = s2st.sandhangan   || {};
+    if (s2base.available || s2sandh.available) {
+        stage2Banner.style.cssText = 'display:block;padding:6px 12px;border-radius:6px;font-size:12px;background:#d4edda;border:1px solid #28a745;color:#155724;';
+        stage2Banner.textContent = 'Stage 2 aktif. Base: '
+            + (s2base.available  ? s2base.classes  + ' kelas' : 'N/A')
+            + ', Sandhangan: '
+            + (s2sandh.available ? s2sandh.classes + ' kelas' : 'N/A');
+    } else {
+        stage2Banner.style.cssText = 'display:block;padding:6px 12px;border-radius:6px;font-size:12px;background:#fff3cd;border:1px solid #ffc107;color:#856404;';
+        stage2Banner.textContent = 'Stage 2 tidak tersedia: ' + (s2base.error || s2sandh.error || 'model belum disync');
+    }
+
+    // Summary counts
+    const crops = data.cropped_results || [];
+    charCount.textContent = '(' + crops.length + ' karakter)';
+
+    let nValid = 0, nNoise = 0;
+    crops.forEach(item => {
+        const s1 = item.stage1;
+        if (s1 && s1.valid)  nValid++;
+        else if (s1)          nNoise++;
+    });
+    if (data.stage1_available && crops.length > 0) {
+        resultsSummary.style.display = 'flex';
+        countValid.textContent = nValid + ' Valid';
+        countNoise.textContent = nNoise + ' Noise';
+    } else {
+        resultsSummary.style.display = 'none';
+    }
+
+    // Build pipeline cards
+    pipelineCards.innerHTML = '';
+    if (crops.length === 0) {
+        pipelineCards.innerHTML = '<p style="text-align:center;color:#6c757d;">Tidak ada aksara yang terdeteksi.</p>';
+        finalTextSection.style.display = 'none';
+        return;
+    }
+
+    const POS_LABEL = {above:'atas', base:'pokok', below:'bawah', beside:'samping', wrapped:'melingkar'};
+
+    crops.forEach((item, idx) => {
+        const s1   = item.stage1;
+        const s2   = item.stage2;
+        const comp = item.composition;
+        const isValid = !s1 || s1.valid;
+
+        // ── Card wrapper ──
+        const card = document.createElement('div');
+        card.className = 'char-card ' + (s1 ? (s1.valid ? 'card-valid' : 'card-noise') : '');
+
+        // ── Card header ──
+        const header = document.createElement('div');
+        header.className = 'card-header';
+        const badgeCls = !s1 ? 'badge-unknown' : (s1.valid ? 'badge-valid' : 'badge-noise');
+        const badgeTxt = !s1 ? '?' : (s1.valid ? 'Valid' : 'Noise') + ' ' + s1.confidence_pct + '%';
+        header.innerHTML = `Karakter #${idx + 1} <span class="stage1-badge ${badgeCls}">${badgeTxt}</span>`;
+        card.appendChild(header);
+
+        // ── Pipeline stages row ──
+        const stages = document.createElement('div');
+        stages.className = 'pipeline-stages';
+
+        // ── [1] SEGMENTASI ──
+        const segCol = document.createElement('div');
+        segCol.className = 'stage-col seg-spatial';
+        segCol.innerHTML = '<div class="stage-title">Segmentasi</div>';
+
+        function makeSegImg(path) {
+            const img = document.createElement('img');
+            img.src = '/' + path + ts;
+            img.className = 'seg-img';
+            return img;
+        }
+
+        // Above row
+        const rowAbove = document.createElement('div');
+        rowAbove.className = 'seg-row seg-above';
+        if (item.above) rowAbove.appendChild(makeSegImg(item.above));
+        segCol.appendChild(rowAbove);
+
+        // Middle row: base + beside + wrapped side by side
+        const rowBase = document.createElement('div');
+        rowBase.className = 'seg-row seg-base';
+        if (item.base)    rowBase.appendChild(makeSegImg(item.base));
+        if (item.beside)  rowBase.appendChild(makeSegImg(item.beside));
+        if (item.wrapped) rowBase.appendChild(makeSegImg(item.wrapped));
+        segCol.appendChild(rowBase);
+
+        // Below row
+        const rowBelow = document.createElement('div');
+        rowBelow.className = 'seg-row seg-below';
+        if (item.below) rowBelow.appendChild(makeSegImg(item.below));
+        segCol.appendChild(rowBelow);
+
+        // ── [2] KLASIFIKASI ──
+        const clsCol = document.createElement('div');
+        clsCol.className = 'stage-col';
+        if (!isValid) clsCol.style.opacity = '0.45';
+        clsCol.innerHTML = '<div class="stage-title">Klasifikasi</div>';
+
+        // Stage 1
+        const s1div = document.createElement('div');
+        s1div.className = 'cls-s1';
+        if (!s1) {
+            s1div.innerHTML = 'Filter: <span class="cls-s1-val val-unknown">—</span>';
+        } else {
+            const vcls = s1.valid ? 'val-valid' : 'val-noise';
+            s1div.innerHTML = `Filter Tahap 1: <span class="cls-s1-val ${vcls}">${s1.valid ? 'Valid' : 'Noise'} ${s1.confidence_pct}%</span>`;
+        }
+        clsCol.appendChild(s1div);
+
+        // Stage 2
+        const s2div = document.createElement('div');
+        s2div.className = 'cls-s2';
+        if (!s2) {
+            s2div.innerHTML = '<span class="cls-s2-none">Tidak dijalankan</span>';
+        } else {
+            // Base
+            if (s2.base) {
+                const row = document.createElement('div');
+                row.className = 'pred-row';
+                row.innerHTML = `<span class="pred-pos">Pokok</span><span class="pred-label">${s2.base.label}</span><span class="pred-conf">${s2.base.confidence_pct}%</span>`;
+                s2div.appendChild(row);
+            }
+            // Sandhangan positions
+            ['above','below','beside','wrapped'].forEach(pos => {
+                if (!s2[pos]) return;
+                const row = document.createElement('div');
+                row.className = 'pred-row pred-sandh';
+                row.innerHTML = `<span class="pred-pos">${POS_LABEL[pos]}</span><span class="pred-label">${s2[pos].label}</span><span class="pred-conf">${s2[pos].confidence_pct}%</span>`;
+                s2div.appendChild(row);
+            });
+            if (!s2.base && !s2.above && !s2.below && !s2.beside && !s2.wrapped) {
+                s2div.innerHTML = '<span class="cls-s2-none">Tidak ada hasil</span>';
+            }
+        }
+        clsCol.appendChild(s2div);
+
+        // ── [3] TRANSLASI ──
+        const transCol = document.createElement('div');
+        transCol.className = 'stage-col trans-col';
+        if (!isValid) transCol.style.opacity = '0.45';
+        transCol.innerHTML = '<div class="stage-title">Translasi</div>';
+
+        const uniEl = document.createElement('div');
+        uniEl.className = 'uni-display';
+        const latEl = document.createElement('div');
+        latEl.className = 'lat-display';
+
+        if (comp && comp.unicode) {
+            uniEl.textContent = comp.unicode;
+            latEl.textContent = comp.latin || '';
+        } else {
+            uniEl.innerHTML = '<span class="uni-none">?</span>';
+            latEl.textContent = '—';
+        }
+        transCol.appendChild(uniEl);
+        transCol.appendChild(latEl);
+
+        // Assemble
+        stages.appendChild(segCol);
+        stages.appendChild(Object.assign(document.createElement('div'), {className:'pipe-arrow', textContent:'→'}));
+        stages.appendChild(clsCol);
+        stages.appendChild(Object.assign(document.createElement('div'), {className:'pipe-arrow', textContent:'→'}));
+        stages.appendChild(transCol);
+        card.appendChild(stages);
+        pipelineCards.appendChild(card);
+    });
+
+    // Final text
+    // Aksara Jawa: same comp.unicode per card, same order as Karakter #1 #2 #3 ...
+    const aksaraTokens = crops
+        .filter(item => { const s1 = item.stage1; return !s1 || s1.valid; })
+        .map(item => item.composition && item.composition.unicode)
+        .filter(Boolean);
+
+    if (aksaraTokens.length > 0) {
+        finalTextSection.style.display = 'block';
+        finalUnicode.innerHTML = aksaraTokens
+            .map(u => `<span style="display:inline-block;unicode-bidi:isolate">${u}</span>`)
+            .join('');
+        finalLatinRaw.textContent = data.raw_latin   || '';
+        finalLatin.textContent    = data.final_latin || '';
+        if (data.steps && data.steps.original)
+            finalOrigImg.src = '/' + data.steps.original + ts;
+    } else {
+        finalTextSection.style.display = 'none';
+    }
+
+    // Debug info
+    if (data.debug) {
+        debugSection.style.display = 'block';
+        const labels = {
+            main_top:'Main Top', main_bottom:'Main Bottom',
+            cut_top:'Cut Top', cut_bottom:'Cut Bottom',
+            peak_row:'Peak Row', peak_value:'Peak Value',
+            core_threshold:'Core Threshold', valley_threshold:'Valley Threshold',
+            midcut_top:'Midcut Top', midcut_bottom:'Midcut Bottom',
+            total_components:'Total Components',
+            anchor_components:'Anchor Components',
+            secondary_components:'Secondary Components',
+            groups_formed:'Groups Formed',
+        };
+        debugPanel.innerHTML = '';
+        Object.entries(data.debug).forEach(([k, v]) => {
+            const label = labels[k] || k;
+            const val   = typeof v === 'number' ? (Number.isInteger(v) ? v : v.toFixed(4)) : v;
+            debugPanel.innerHTML += `<div class="debug-item"><span class="debug-label">${label}</span><span class="debug-value">${val}</span></div>`;
+        });
+    }
+}
+
+function setLoading(is) {
+    spinner.style.display   = is ? 'block' : 'none';
+    submitBtn.disabled      = is;
+    submitBtn.textContent   = is ? 'Memproses...' : 'Proses Gambar';
+}
+function setImagesLoading(is) {
+    document.querySelectorAll('.step-image').forEach(el =>
+        is ? el.classList.add('loading') : el.classList.remove('loading'));
+}
+function showStatus(msg, type) {
+    statusDiv.textContent  = msg;
+    statusDiv.style.color  = type === 'success' ? 'var(--success-color)' : 'var(--danger-color)';
+}
+</script>
+</body>
+</html>

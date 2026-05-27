@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regression Suite - Advanced OCR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8f9fa;
+            --panel-bg: #ffffff;
+            --panel-border: #dee2e6;
+            --primary: #007bff;
+            --primary-hover: #0056b3;
+            --success: #28a745;
+            --success-hover: #218838;
+            --danger: #dc3545;
+            --danger-hover: #c82333;
+            --text-main: #212529;
+            --text-muted: #6c757d;
+        }
+
+        body { 
+            font-family: 'Inter', sans-serif; 
+            margin: 0; padding: 20px; 
+            background: var(--bg-color); 
+            color: var(--text-main);
+            min-height: 100vh;
+        }
+
+        .panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 15px 24px; margin-bottom: 20px;
+        }
+
+        .header-title { margin: 0; font-size: 20px; font-weight: 600; letter-spacing: -0.5px; }
+
+        .progress-container { flex: 1; margin: 0 40px; }
+        .progress-text { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; }
+        .progress-bar-bg { width: 100%; height: 8px; background: #e9ecef; border-radius: 4px; overflow: hidden; }
+        .progress-bar-fill { height: 100%; background: var(--success); width: 0%; transition: width 0.4s ease; }
+
+        .btn {
+            background: #e2e8f0; color: var(--text-main);
+            border: 1px solid #cbd5e1; border-radius: 4px;
+            padding: 8px 16px; font-size: 13px; font-weight: 500;
+            cursor: pointer; transition: all 0.2s;
+            font-family: inherit;
+        }
+        .btn:hover:not(:disabled) { background: #cbd5e1; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        
+        .btn-primary { background: var(--primary); border-color: var(--primary); color: white; }
+        .btn-primary:hover:not(:disabled) { background: var(--primary-hover); }
+        .btn-success { background: var(--success); border-color: var(--success); color: white; }
+        .btn-success:hover:not(:disabled) { background: var(--success-hover); }
+        .btn-danger { background: var(--danger); border-color: var(--danger); color: white; }
+        .btn-danger:hover:not(:disabled) { background: var(--danger-hover); }
+
+        .main-container { display: flex; gap: 20px; align-items: flex-start; }
+        
+        .sidebar { flex: 0 0 320px; display: flex; flex-direction: column; gap: 16px; position: sticky; top: 20px; }
+        .nav-controls { display: flex; justify-content: space-between; align-items: center; padding: 16px; }
+        .counter { font-weight: 600; font-size: 14px; letter-spacing: 1px; }
+
+        .param-group { padding: 16px; }
+        .param-group h3 { margin: 0 0 12px 0; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+        .param-group.shared { border-left: 4px solid var(--primary); }
+        .param-group.old { border-left: 4px solid #6c757d; }
+        .param-group.new { border-left: 4px solid var(--success); }
+
+        .slider-row { margin-bottom: 12px; }
+        .slider-row:last-child { margin-bottom: 0; }
+        .slider-label { display: flex; justify-content: space-between; font-size: 13px; font-weight: 500; margin-bottom: 6px; }
+        .slider-val { color: var(--primary); font-weight: 700; }
+        
+        input[type="range"] { width: 100%; accent-color: var(--primary); }
+
+        .action-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+        .content { flex: 1; display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+        
+        .image-panel { padding: 20px; display: flex; flex-direction: column; align-items: center; position: relative; }
+        #filename-display { margin-top: 0; color: var(--text-muted); font-size: 13px; align-self: flex-start; }
+        .main-image { max-width: 100%; max-height: 200px; border-radius: 4px; border: 1px solid var(--panel-border); }
+
+        .comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .method-box { padding: 20px; display: flex; flex-direction: column; }
+        .method-box h3 { margin: 0 0 16px 0; text-align: center; }
+        .method-box.old h3 { color: #6c757d; }
+        .method-box.new h3 { color: var(--success); }
+
+        .result-img-container { text-align: center; margin-bottom: 16px; }
+        .result-img { max-width: 100%; border-radius: 4px; border: 1px solid var(--panel-border); cursor: zoom-in; }
+
+        .crops-grid { 
+            display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 20px; 
+            background: #f1f3f5; padding: 12px; border-radius: 4px;
+        }
+        .crops-grid img { 
+            height: 36px; border: 1px solid var(--panel-border); border-radius: 2px; 
+            background: #fff; cursor: zoom-in; transition: border-color 0.1s;
+        }
+        .crops-grid img:hover { border-color: var(--primary); }
+
+        /* Zoomed Modal CSS */
+        .zoomed-img {
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 90vw; max-height: 90vh;
+            z-index: 9999;
+            box-shadow: 0 0 0 10000px rgba(0,0,0,0.8);
+            cursor: zoom-out;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .stats-badge { background: #e9ecef; padding: 4px 10px; border-radius: 4px; font-size: 13px; font-weight: 600; align-self: center; margin-bottom: 16px; border: 1px solid var(--panel-border); }
+
+        .regression-panel { padding: 20px; }
+        .regression-panel h3 { margin: 0 0 12px 0; font-size: 14px; font-weight: 600; color: #856404; }
+        .failures-list { margin: 0; padding-left: 20px; color: var(--danger); font-size: 13px; line-height: 1.6; }
+        .global-bounds { font-family: monospace; color: var(--primary); background: #e9ecef; padding: 2px 6px; border-radius: 4px; }
+
+        .hotkey-hints { font-size: 11px; color: var(--text-muted); text-align: center; margin-top: 10px; }
+        kbd { background: #e9ecef; border: 1px solid #dee2e6; border-radius: 3px; padding: 2px 5px; font-family: monospace; }
+        
+        .ignored-overlay { position: absolute; inset: 0; background: rgba(220, 53, 69, 0.9); display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: bold; color: white; border-radius: 4px; z-index: 50; display: none; }
+    </style>
+</head>
+<body>
+
+<div class="header panel">
+    <h1 class="header-title">Regression Suite</h1>
+    <div class="progress-container">
+        <div class="progress-text">
+            <span>Overall Progress (Accepted)</span>
+            <span id="progress-stats">0 / 200 (0%)</span>
+        </div>
+        <div class="progress-bar-bg">
+            <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+    </div>
+    <button class="btn btn-primary" onclick="window.location.href='/export_csv'">Export CSV</button>
+</div>
+
+<div class="main-container">
+    <div class="sidebar">
+        <div class="nav-controls panel">
+            <button class="btn" id="btn-prev">Prev</button>
+            <span class="counter" id="img-counter">1 / 200</span>
+            <button class="btn" id="btn-next">Next</button>
+        </div>
+
+        <div class="param-group shared panel">
+            <h3>Shared Parameters</h3>
+            <div class="slider-row">
+                <div class="slider-label"><span>Threshold</span><span class="slider-val" id="v-thresh">160</span></div>
+                <input type="range" id="p-thresh" min="0" max="255" value="160">
+            </div>
+            <div class="slider-row">
+                <div class="slider-label"><span>Kernel Size</span><span class="slider-val" id="v-kernel">5</span></div>
+                <input type="range" id="p-kernel" min="1" max="15" step="2" value="5">
+            </div>
+            <div class="slider-row">
+                <div class="slider-label"><span>Min Area (px)</span><span class="slider-val" id="v-minarea">15</span></div>
+                <input type="range" id="p-minarea" min="1" max="100" value="15">
+            </div>
+        </div>
+
+        <div class="param-group old panel">
+            <h3>Old Method</h3>
+            <div class="slider-row">
+                <div class="slider-label"><span>Grouping Distance</span><span class="slider-val" id="v-gdist">8</span></div>
+                <input type="range" id="p-gdist" min="1" max="50" value="8">
+            </div>
+            <button class="btn" id="btn-load-old" style="width: 100%; margin-top:10px; font-size:11px;">Load Old Accepted Params</button>
+        </div>
+
+        <div class="param-group new panel">
+            <h3>New Method</h3>
+            <div class="slider-row">
+                <div class="slider-label"><span>Main Height Ratio</span><span class="slider-val" id="v-mhr">0.50</span></div>
+                <input type="range" id="p-mhr" min="20" max="80" value="50">
+            </div>
+            <div class="slider-row">
+                <div class="slider-label"><span>Main Merge Gap</span><span class="slider-val" id="v-mmg">5</span></div>
+                <input type="range" id="p-mmg" min="1" max="20" value="5">
+            </div>
+            <button class="btn" id="btn-load-new" style="width: 100%; margin-top:10px; font-size:11px;">Load New Accepted Params</button>
+        </div>
+
+        <div class="action-row">
+            <button class="btn" id="btn-reset">Reset Params</button>
+            <button class="btn btn-danger" id="btn-ignore">Flag as Skip</button>
+        </div>
+
+        <div class="hotkey-hints">
+            <kbd>←</kbd> <kbd>→</kbd> Navigate | <kbd>Shift+O</kbd> Acc Old | <kbd>Shift+N</kbd> Acc New<br>
+            <kbd>R</kbd> Reset | <kbd>I</kbd> Skip Image
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="image-panel panel">
+            <p id="filename-display">filename.jpg</p>
+            <img id="main-image" class="main-image" src="" alt="Source Image">
+            <div class="ignored-overlay" id="ignored-overlay">FLAGGED AS UNSEGMENTABLE (IGNORED)</div>
+        </div>
+
+        <div class="comparison-grid">
+            <!-- Old Method Result -->
+            <div class="method-box old panel">
+                <h3>Heuristic Grouping (Old)</h3>
+                <div class="result-img-container">
+                    <img id="res-old-img" class="result-img" src="" onclick="toggleZoom(this)">
+                </div>
+                <div class="stats-badge"><span id="count-old">0</span> Characters</div>
+                <div class="crops-grid" id="crops-old"></div>
+                <button class="btn btn-success" id="btn-accept-old" style="width: 100%; padding:12px;">Accept Expected: <span id="btn-lbl-old">0</span></button>
+            </div>
+
+            <!-- New Method Result -->
+            <div class="method-box new panel">
+                <h3>Overlap Grouping (New)</h3>
+                <div class="result-img-container">
+                    <img id="res-new-img" class="result-img" src="" onclick="toggleZoom(this)">
+                </div>
+                <div class="stats-badge"><span id="count-new">0</span> Characters</div>
+                <div class="crops-grid" id="crops-new"></div>
+                <button class="btn btn-success" id="btn-accept-new" style="width: 100%; padding: 12px;">Accept Expected: <span id="btn-lbl-new">0</span></button>
+            </div>
+        </div>
+
+        <div class="regression-panel panel">
+            <h3>Live Regression Checker</h3>
+            <div id="regression-status" style="font-size: 13px; color: var(--text-muted); margin-bottom: 8px;">Idle. Move a slider to test against past images...</div>
+            <ul class="failures-list" id="failures-list"></ul>
+        </div>
+    </div>
+</div>
+
+<script>
+    let state = { images: [], accepted_old: {}, accepted_new: {}, ignored: [] };
+    let currentIndex = 0;
+    let debounceTimer;
+
+    function toggleZoom(imgEl) {
+        if (imgEl.classList.contains('zoomed-img')) {
+            imgEl.classList.remove('zoomed-img');
+            // Re-insert into original parent
+            const ogParentId = imgEl.getAttribute('data-parent');
+            if (ogParentId) {
+                document.getElementById(ogParentId).appendChild(imgEl);
+            }
+        } else {
+            // Save original parent
+            imgEl.setAttribute('data-parent', imgEl.parentElement.id);
+            imgEl.classList.add('zoomed-img');
+            document.body.appendChild(imgEl);
+        }
+    }
+
+    const els = {
+        thresh: document.getElementById('p-thresh'),
+        kernel: document.getElementById('p-kernel'),
+        minarea: document.getElementById('p-minarea'),
+        gdist: document.getElementById('p-gdist'),
+        mhr: document.getElementById('p-mhr'),
+        mmg: document.getElementById('p-mmg')
+    };
+
+    async function init() {
+        const res = await fetch('/state');
+        state = await res.json();
+        updateUI();
+        processImage();
+    }
+
+    function getParams() {
+        return {
+            threshold: els.thresh.value,
+            kernel_size: els.kernel.value,
+            min_area: els.minarea.value,
+            grouping_distance: els.gdist.value,
+            main_height_ratio: (els.mhr.value / 100).toFixed(2),
+            main_merge_gap: els.mmg.value
+        };
+    }
+
+    function setParams(p) {
+        if(p.threshold) els.thresh.value = p.threshold;
+        if(p.kernel_size) els.kernel.value = p.kernel_size;
+        if(p.min_area) els.minarea.value = p.min_area;
+        if(p.grouping_distance) els.gdist.value = p.grouping_distance;
+        if(p.main_height_ratio) els.mhr.value = p.main_height_ratio * 100;
+        if(p.main_merge_gap) els.mmg.value = p.main_merge_gap;
+        syncSliderTexts();
+    }
+
+    function syncSliderTexts() {
+        document.getElementById('v-thresh').innerText = els.thresh.value;
+        document.getElementById('v-kernel').innerText = els.kernel.value;
+        document.getElementById('v-minarea').innerText = els.minarea.value;
+        document.getElementById('v-gdist').innerText = els.gdist.value;
+        document.getElementById('v-mhr').innerText = (els.mhr.value/100).toFixed(2);
+        document.getElementById('v-mmg').innerText = els.mmg.value;
+    }
+
+    function updateProgressBar() {
+        let completed = 0;
+        const total = state.images.length;
+        if(total === 0) return;
+
+        state.images.forEach(img => {
+            if (state.ignored.includes(img)) completed++;
+            else if (state.accepted_old[img] && state.accepted_new[img]) completed++;
+            else if (state.accepted_old[img] || state.accepted_new[img]) completed += 0.5;
+        });
+
+        const pct = ((completed / total) * 100).toFixed(1);
+        document.getElementById('progress-stats').innerText = `${Math.floor(completed)} / ${total} (${pct}%)`;
+        document.getElementById('progress-fill').style.width = `${pct}%`;
+    }
+
+    function updateUI() {
+        if (state.images.length === 0) return;
+        const filename = state.images[currentIndex];
+        
+        document.getElementById('img-counter').innerText = `${currentIndex + 1} / ${state.images.length}`;
+        document.getElementById('filename-display').innerText = filename;
+        document.getElementById('main-image').src = '/image/' + filename;
+        
+        document.getElementById('btn-prev').disabled = currentIndex === 0;
+        document.getElementById('btn-next').disabled = currentIndex === state.images.length - 1;
+
+        const isIgnored = state.ignored.includes(filename);
+        document.getElementById('ignored-overlay').style.display = isIgnored ? 'flex' : 'none';
+
+        const oldAcc = state.accepted_old[filename];
+        const btnOld = document.getElementById('btn-accept-old');
+        document.getElementById('btn-load-old').disabled = !oldAcc;
+        if(oldAcc) {
+            btnOld.innerHTML = `Accepted (${oldAcc.expected})`;
+            btnOld.style.background = '#e2e8f0';
+            btnOld.style.color = '#28a745';
+            btnOld.style.borderColor = '#cbd5e1';
+            btnOld.disabled = true;
+        } else {
+            btnOld.innerHTML = `Accept Count`;
+            btnOld.style.background = '';
+            btnOld.style.color = '';
+            btnOld.style.borderColor = '';
+            btnOld.disabled = false;
+        }
+
+        const newAcc = state.accepted_new[filename];
+        const btnNew = document.getElementById('btn-accept-new');
+        document.getElementById('btn-load-new').disabled = !newAcc;
+        if(newAcc) {
+            btnNew.innerHTML = `Accepted (${newAcc.expected})`;
+            btnNew.style.background = '#e2e8f0';
+            btnNew.style.color = '#28a745';
+            btnNew.style.borderColor = '#cbd5e1';
+            btnNew.disabled = true;
+        } else {
+            btnNew.innerHTML = `Accept Count`;
+            btnNew.style.background = '';
+            btnNew.style.color = '';
+            btnNew.style.borderColor = '';
+            btnNew.disabled = false;
+        }
+
+        updateProgressBar();
+    }
+
+    async function processMethod(method) {
+        const filename = state.images[currentIndex];
+        const res = await fetch('/process', {
+            method: 'POST', headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ filename, method, ...getParams() })
+        });
+        const data = await res.json();
+        
+        const ts = '?t=' + Date.now();
+        if (data.result && data.result.steps) {
+            const imgEl = document.getElementById(`res-${method}-img`);
+            // To ensure zooming logic works smoothly, reset zoom if already zoomed
+            if (imgEl.classList.contains('zoomed-img')) {
+                toggleZoom(imgEl);
+            }
+            imgEl.src = `/${data.result.steps.final_boxes}${ts}`;
+            // Set unique parent id for zooming recovery if not present
+            if (!imgEl.parentElement.id) {
+                imgEl.parentElement.id = `parent-res-${method}-img`;
+            }
+
+            document.getElementById(`count-${method}`).innerText = data.char_count;
+            
+            const isAcc = (method === 'old') ? state.accepted_old[filename] : state.accepted_new[filename];
+            if(!isAcc) {
+                document.getElementById(`btn-accept-${method}`).innerHTML = `Verify & Accept: <b>${data.char_count}</b>`;
+            }
+
+            const cropDiv = document.getElementById(`crops-${method}`);
+            cropDiv.id = `crops-${method}`; // Ensure ID
+            cropDiv.innerHTML = '';
+            (data.result.cropped_results || []).forEach((p, idx) => {
+                const img = document.createElement('img');
+                img.src = `/${p}${ts}`;
+                img.onclick = function() { toggleZoom(this); };
+                cropDiv.appendChild(img);
+            });
+        }
+    }
+
+    async function processImage() {
+        if(state.images.length === 0 || state.ignored.includes(state.images[currentIndex])) return;
+        await processMethod('old');
+        await processMethod('new');
+        revalidateBackground();
+    }
+
+    async function revalidateBackground() {
+        const status = document.getElementById('regression-status');
+        const list = document.getElementById('failures-list');
+        status.innerText = "Revalidating...";
+        status.style.color = "#856404";
+        list.innerHTML = "";
+
+        const p = getParams();
+        const [resOld, resNew] = await Promise.all([
+            fetch('/revalidate', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ method: 'old', params: p }) }),
+            fetch('/revalidate', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ method: 'new', params: p }) })
+        ]);
+
+        const dataOld = await resOld.json();
+        const dataNew = await resNew.json();
+
+        const allFails = [...dataOld.failures.map(f => `[OLD] ${f.msg}`), ...dataNew.failures.map(f => `[NEW] ${f.msg}`)];
+        
+        if (allFails.length === 0) {
+            status.innerText = "Current parameters are completely safe for all validated past images.";
+            status.style.color = "var(--success)";
+        } else {
+            status.innerText = `Warning! ${allFails.length} past images broke with these parameters.`;
+            status.style.color = "var(--danger)";
+            allFails.forEach(f => {
+                const li = document.createElement('li');
+                li.innerHTML = f.replace(/(\d+)\s*-\s*(\d+)/g, '<span class="global-bounds">$1 - $2</span>');
+                list.appendChild(li);
+            });
+        }
+    }
+
+    Object.keys(els).forEach(key => {
+        els[key].addEventListener('input', () => {
+            syncSliderTexts();
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => { processImage(); }, 400);
+        });
+    });
+
+    document.getElementById('btn-reset').addEventListener('click', () => {
+        setParams({ threshold: 160, kernel_size: 5, min_area: 15, grouping_distance: 8, main_height_ratio: 0.5, main_merge_gap: 5 });
+        processImage();
+    });
+
+    async function acceptResult(method) {
+        const filename = state.images[currentIndex];
+        if(state.ignored.includes(filename)) return;
+        const count = document.getElementById(`count-${method}`).innerText;
+        await fetch('/accept', {
+            method: 'POST', headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ filename, method, expected: parseInt(count), params: getParams() })
+        });
+        const res = await fetch('/state'); state = await res.json();
+        updateUI(); revalidateBackground();
+    }
+
+    document.getElementById('btn-accept-old').addEventListener('click', () => acceptResult('old'));
+    document.getElementById('btn-accept-new').addEventListener('click', () => acceptResult('new'));
+
+    document.getElementById('btn-ignore').addEventListener('click', async () => {
+        const filename = state.images[currentIndex];
+        await fetch('/ignore', {
+            method: 'POST', headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ filename })
+        });
+        const res = await fetch('/state'); state = await res.json();
+        updateUI();
+    });
+
+    document.getElementById('btn-load-old').addEventListener('click', () => {
+        const p = state.accepted_old[state.images[currentIndex]]?.params;
+        if(p) { setParams(p); processImage(); }
+    });
+    document.getElementById('btn-load-new').addEventListener('click', () => {
+        const p = state.accepted_new[state.images[currentIndex]]?.params;
+        if(p) { setParams(p); processImage(); }
+    });
+
+    function goPrev() { if(currentIndex > 0) { currentIndex--; updateUI(); processImage(); } }
+    function goNext() { if(currentIndex < state.images.length - 1) { currentIndex++; updateUI(); processImage(); } }
+    
+    document.getElementById('btn-prev').addEventListener('click', goPrev);
+    document.getElementById('btn-next').addEventListener('click', goNext);
+
+    document.addEventListener('keydown', (e) => {
+        if (e.target.tagName === 'INPUT') return;
+        if (e.key === 'ArrowLeft') goPrev();
+        if (e.key === 'ArrowRight') goNext();
+        if (e.key === 'O' && e.shiftKey) acceptResult('old');
+        if (e.key === 'N' && e.shiftKey) acceptResult('new');
+        if (e.key.toLowerCase() === 'r') document.getElementById('btn-reset').click();
+        if (e.key.toLowerCase() === 'i') document.getElementById('btn-ignore').click();
+    });
+
+    init();
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Trained models (train using javanese-ocr-cnn-training)
+tahap1/
+tahap2/
+
+# Generated outputs
+static/results/
+static/uploads/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db

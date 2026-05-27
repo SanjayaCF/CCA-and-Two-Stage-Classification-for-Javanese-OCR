@@ -1,0 +1,17 @@
+# Datasets (not included — contact author)
+dataset_binary/
+dataset_stage2/
+labeler_crops/
+
+# Progress state files (user-specific)
+progress_*.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db

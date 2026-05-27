@@ -1,0 +1,243 @@
+{
+    "images": [
+        "d0118263 line0.jpg",
+        "d0118263 line1.jpg",
+        "d0118263 line10.jpg",
+        "d0118263 line11.jpg",
+        "d0118263 line12.jpg",
+        "d0118263 line13.jpg",
+        "d0118263 line14.jpg",
+        "d0118263 line15.jpg",
+        "d0118263 line16.jpg",
+        "d0118263 line17.jpg",
+        "d0118263 line18.jpg",
+        "d0118263 line19.jpg",
+        "d0118263 line2.jpg",
+        "d0118263 line20.jpg",
+        "d0118263 line21.jpg",
+        "d0118263 line3.jpg",
+        "d0118263 line4.jpg",
+        "d0118263 line5.jpg",
+        "d0118263 line6.jpg",
+        "d0118263 line7.jpg",
+        "d0118263 line8.jpg",
+        "d0118263 line9.jpg",
+        "d0118264 line0.jpg",
+        "d0118264 line1.jpg",
+        "d0118264 line10.jpg",
+        "d0118264 line11.jpg",
+        "d0118264 line12.jpg",
+        "d0118264 line13.jpg",
+        "d0118264 line14.jpg",
+        "d0118264 line15.jpg",
+        "d0118264 line16.jpg",
+        "d0118264 line17.jpg",
+        "d0118264 line18.jpg",
+        "d0118264 line19.jpg",
+        "d0118264 line2.jpg",
+        "d0118264 line20.jpg",
+        "d0118264 line3.jpg",
+        "d0118264 line4.jpg",
+        "d0118264 line5.jpg",
+        "d0118264 line6.jpg",
+        "d0118264 line7.jpg",
+        "d0118264 line8.jpg",
+        "d0118264 line9.jpg",
+        "d0118265 line0.jpg",
+        "d0118265 line1.jpg",
+        "d0118265 line10.jpg",
+        "d0118265 line11.jpg",
+        "d0118265 line12.jpg",
+        "d0118265 line13.jpg",
+        "d0118265 line14.jpg",
+        "d0118265 line15.jpg",
+        "d0118265 line16.jpg",
+        "d0118265 line17.jpg",
+        "d0118265 line18.jpg",
+        "d0118265 line19.jpg",
+        "d0118265 line2.jpg",
+        "d0118265 line3.jpg",
+        "d0118265 line4.jpg",
+        "d0118265 line5.jpg",
+        "d0118265 line6.jpg",
+        "d0118265 line7.jpg",
+        "d0118265 line8.jpg",
+        "d0118265 line9.jpg",
+        "d0120278 line0.jpg",
+        "d0120278 line1.jpg",
+        "d0120278 line10.jpg",
+        "d0120278 line11.jpg",
+        "d0120278 line12.jpg",
+        "d0120278 line13.jpg",
+        "d0120278 line14.jpg",
+        "d0120278 line15.jpg",
+        "d0120278 line16.jpg",
+        "d0120278 line17.jpg",
+        "d0120278 line18.jpg",
+        "d0120278 line19.jpg",
+        "d0120278 line2.jpg",
+        "d0120278 line20.jpg",
+        "d0120278 line3.jpg",
+        "d0120278 line4.jpg",
+        "d0120278 line5.jpg",
+        "d0120278 line6.jpg",
+        "d0120278 line7.jpg",
+        "d0120278 line8.jpg",
+        "d0120278 line9.jpg",
+        "d0120279 line0.jpg",
+        "d0120279 line1.jpg",
+        "d0120279 line10.jpg",
+        "d0120279 line11.jpg",
+        "d0120279 line12.jpg",
+        "d0120279 line13.jpg",
+        "d0120279 line14.jpg",
+        "d0120279 line15.jpg",
+        "d0120279 line16.jpg",
+        "d0120279 line17.jpg",
+        "d0120279 line18.jpg",
+        "d0120279 line19.jpg",
+        "d0120279 line2.jpg",
+        "d0120279 line20.jpg",
+        "d0120279 line3.jpg",
+        "d0120279 line4.jpg"
+    ],
+    "accepted_old": {
+        "d0118263 line0.jpg": {
+            "expected": 5,
+            "params": {
+                "threshold": "160",
+                "kernel_size": "5",
+                "min_area": "15",
+                "grouping_distance": "8",
+                "main_height_ratio": "0.50",
+                "main_merge_gap": "5"
+            }
+        },
+        "d0118263 line1.jpg": {
+            "expected": 12,
+            "params": {
+                "threshold": "160",
+                "kernel_size": "5",
+                "min_area": "15",
+                "grouping_distance": "8",
+                "main_height_ratio": "0.50",
+                "main_merge_gap": "5"
+            }
+        },
+        "d0118263 line10.jpg": {
+            "expected": 13,
+            "params": {
+                "threshold": "160",
+                "kernel_size": "5",
+                "min_area": "15",
+                "grouping_distance": "8",
+                "main_height_ratio": "0.50",
+                "main_merge_gap": "5"
+            }
+        },
+        "d0118263 line11.jpg": {
+            "expected": 10,
+            "params": {
+                "threshold": "160",
+                "kernel_size": "5",
+                "min_area": "15",
+                "grouping_distance": "8",
+                "main_height_ratio": "0.50",
+                "main_merge_gap": "5"
+            }
+        },
+        "d0118263 line12.jpg": {
+            "expected": 11,
+            "params": {
+                "threshold": "160",
+                "kernel_size": "5",
+                "min_area": "15",
+                "grouping_distance": "8",
+                "main_height_ratio": "0.50",
+                "main_merge_gap": "5"
+            }
+        },
+        "d0118263 line13.jpg": {
+            "expected": 12,
+            "params": {
+                "threshold": "160",
+                "kernel_size": "5",
+                "min_area": "15",
+                "grouping_distance": "8",
+                "main_height_ratio": "0.50",
+                "main_merge_gap": "6"
+            }
+        }
+    },
+    "accepted_new": {
+        "d0118263 line0.jpg": {
+            "expected": 3,
+            "params": {
+                "threshold": "160",
+                "kernel_size": "5",
+                "min_area": "15",
+                "grouping_distance": "8",
+                "main_height_ratio": "0.50",
+                "main_merge_gap": "5"
+            }
+        },
+        "d0118263 line1.jpg": {
+            "expected": 11,
+            "params": {
+                "threshold": "160",
+                "kernel_size": "5",
+                "min_area": "15",
+                "grouping_distance": "8",
+                "main_height_ratio": "0.50",
+                "main_merge_gap": "5"
+            }
+        },
+        "d0118263 line10.jpg": {
+            "expected": 13,
+            "params": {
+                "threshold": "160",
+                "kernel_size": "5",
+                "min_area": "15",
+                "grouping_distance": "8",
+                "main_height_ratio": "0.50",
+                "main_merge_gap": "5"
+            }
+        },
+        "d0118263 line11.jpg": {
+            "expected": 8,
+            "params": {
+                "threshold": "160",
+                "kernel_size": "5",
+                "min_area": "15",
+                "grouping_distance": "8",
+                "main_height_ratio": "0.50",
+                "main_merge_gap": "5"
+            }
+        },
+        "d0118263 line12.jpg": {
+            "expected": 10,
+            "params": {
+                "threshold": "160",
+                "kernel_size": "5",
+                "min_area": "15",
+                "grouping_distance": "8",
+                "main_height_ratio": "0.50",
+                "main_merge_gap": "5"
+            }
+        },
+        "d0118263 line13.jpg": {
+            "expected": 10,
+            "params": {
+                "threshold": "160",
+                "kernel_size": "5",
+                "min_area": "15",
+                "grouping_distance": "8",
+                "main_height_ratio": "0.50",
+                "main_merge_gap": "6"
+            }
+        }
+    },
+    "ignored": [
+        "d0118263 line14.jpg"
+    ]
+}

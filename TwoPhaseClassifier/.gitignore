@@ -1,0 +1,20 @@
+# Trained model weights
+*.keras
+*.h5
+*.tflite
+*.pkl
+*.joblib
+
+# Datasets (obtain via javanese-ocr-labeling-tool)
+dataset_binary/
+dataset_stage2/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -1,0 +1,4665 @@
+{
+  "d0118263_line8.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "la",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦭ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": "_la",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ꧀ꦭ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦒꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": "wulu_cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦷ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "dha",
+          "above": "cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦝꦁ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wignyan",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦃ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0118264_line11.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦒꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": "pepet",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩꦼ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wignyan",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦃ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦒꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": "pepet_layar",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩꦼꦂ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦒꦸ"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "ma",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦒꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": null,
+          "below": null,
+          "beside": "pangkon"
+        },
+        "corrected_unicode": "ꦠ꧀"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0118265_line0.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "nga",
+          "above": null,
+          "below": "_na",
+          "beside": null
+        },
+        "corrected_unicode": "ꦔ꧀ꦤ"
+      },
+      {
+        "status": "unknown"
+      },
+      {
+        "status": "unknown"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0118265_line15.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": "wulu_cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲꦷ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": "layar",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦏꦂ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wa",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦮꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": "cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦁ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "tarung",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦴ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lungsi",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧉"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0120278_line16.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ba",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦧꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ja",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦗ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲ"
+      },
+      {
+        "status": "seg_error"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wa",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦮꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "la",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦭꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": "pangkon"
+        },
+        "corrected_unicode": "ꦱ꧀"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0120279_line15.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": "wulu_cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲꦷ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": "cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦏꦁ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "_pa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧀ꦥ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦩꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": "_nga",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ꧀ꦔ"
+      }
+    ],
+    "missing_count": 1
+  },
+  "d0120280_line11.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "nga",
+          "above": "cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦔꦁ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": "layar",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦒꦂ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": "cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲꦁ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": "layar",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦒꦂ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": "wulu_cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲꦷ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦱꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0120280_line9.jpg": {
+    "tokens": [
+      {
+        "status": "seg_error"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pa",
+          "above": "cecak",
+          "below": "_ta",
+          "beside": null
+        },
+        "corrected_unicode": "ꦥꦁ꧀ꦠ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦏ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦮ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": "_da",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ꧀ꦢ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "da",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦢꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 1
+  },
+  "d0201000_line10.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ja",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦗ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "nga",
+          "above": null,
+          "below": "_na",
+          "beside": null
+        },
+        "corrected_unicode": "ꦔ꧀ꦤ"
+      }
+    ],
+    "missing_count": 2
+  },
+  "d0201000_line13.jpg": {
+    "tokens": [
+      {
+        "status": "seg_error"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦏ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wa",
+          "above": "pepet",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦮꦼ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "da",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦢ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "la",
+          "above": null,
+          "below": "_la",
+          "beside": null
+        },
+        "corrected_unicode": "ꦭ꧀ꦭ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": "pepet",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦏꦼ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": "_da",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ꧀ꦢ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": "wulu_cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦷ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ya",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦪ"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "pa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦥ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "ba",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦧ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "_sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧀ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦠꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦠꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": null,
+          "below": null,
+          "beside": "pangkon"
+        },
+        "corrected_unicode": "ꦠ꧀"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0201003_line1.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "nga",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦔ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wa",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦮꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": "wulu",
+          "below": "_ta",
+          "beside": null
+        },
+        "corrected_unicode": "ꦠꦶ꧀ꦠ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": null,
+          "below": "_ba",
+          "beside": null
+        },
+        "corrected_unicode": "ꦩ꧀ꦧ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "nya",
+          "above": "layar",
+          "below": "_ta",
+          "beside": null
+        },
+        "corrected_unicode": "ꦚꦂ꧀ꦠ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "da",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦢꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0201003_line11.jpg": {
+    "tokens": [
+      {
+        "status": "seg_error"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "_sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧀ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": "_ta",
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ꧀ꦠ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "_ha",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧀ꦲ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦮ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦒꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lungsi",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧉"
+      }
+    ],
+    "missing_count": 1
+  },
+  "d0201004_line6.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦥ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "ma",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "seg_error"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": null,
+          "below": "_ta",
+          "beside": null
+        },
+        "corrected_unicode": "ꦠ꧀ꦠ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": "wulu_cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲꦷ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ba",
+          "above": "pepet",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦧꦼ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": "_ja",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ꧀ꦗ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "nga",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦔ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": "pangkon"
+        },
+        "corrected_unicode": "ꦤ꧀"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0201005_line10.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": "cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦠꦁ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦒ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "la",
+          "above": null,
+          "below": "_ka",
+          "beside": null
+        },
+        "corrected_unicode": "ꦭ꧀ꦏ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pa",
+          "above": "wulu_cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦥꦷ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦠꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": "cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦒꦁ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "da",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦢ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0202027_line7.jpg": {
+    "tokens": [
+      {
+        "status": "seg_error"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ya",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦪ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦏ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦮ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "da",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦢ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦒꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 1
+  },
+  "d0202028_line20.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ya",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦪ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": "wulu",
+          "below": "_da",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦶ꧀ꦢ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "la",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦭꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 1
+  },
+  "d0202029_line1.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pa",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦥꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "nga",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦔꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "_sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧀ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "da",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦢꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0203029_line0.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "nga",
+          "above": null,
+          "below": "pengkal",
+          "beside": null
+        },
+        "corrected_unicode": "ꦔꦾ"
+      }
+    ],
+    "missing_count": 1
+  },
+  "d0203030_line10.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 5
+  },
+  "d0203048_line14.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦏ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦫꦸ"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "pa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦥ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wa",
+          "above": null,
+          "below": "_ta",
+          "beside": null
+        },
+        "corrected_unicode": "ꦮ꧀ꦠ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0204053_line15.jpg": {
+    "tokens": [
+      {
+        "status": "seg_error"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": "wulu_cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲꦷ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": "wulu_cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦠꦷ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦠ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": "wulu_layar",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦶꦂ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "la",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦭ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wa",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦮꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": "wulu_layar",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦏꦶꦂ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0204053_line8.jpg": {
+    "tokens": [
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "nga",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦔ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦏ"
+      },
+      {
+        "status": "unknown"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ba",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦧ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ca",
+          "above": "wulu",
+          "below": "_wa",
+          "beside": null
+        },
+        "corrected_unicode": "ꦕꦶ꧀ꦮ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": null,
+          "below": "_ba",
+          "beside": null
+        },
+        "corrected_unicode": "ꦩ꧀ꦧ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "da",
+          "above": "wulu_cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦢꦷ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wa",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦮꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0204054_line17.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": "pepet",
+          "below": "_ta",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦼ꧀ꦠ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦱꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": "pepet",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩꦼ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "tarung",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦴ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "la",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦭꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦩꦸ"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 2
+  },
+  "d0204054_line5.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "_sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧀ꦱ"
+      },
+      {
+        "status": "seg_error"
+      },
+      {
+        "status": "seg_error"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 3
+  },
+  "d0204055_line8.jpg": {
+    "tokens": [
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0204058_line0.jpg": {
+    "tokens": [
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0204059_line6.jpg": {
+    "tokens": [
+      {
+        "status": "seg_error"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "nga",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦔ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": "_ta",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ꧀ꦠ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pa",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦥꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦏꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "la",
+          "above": null,
+          "below": "_wa",
+          "beside": null
+        },
+        "corrected_unicode": "ꦭ꧀ꦮ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "tarung",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦴ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "la",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦭꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0204060_line14.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": "cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦏꦁ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "da",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦢ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "tarung",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦴ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wignyan",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦃ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦏꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": "pepet",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩꦼ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "da",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦢ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wignyan",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦃ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "da",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦢꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "la",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦭꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0205074_line8.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": "cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦏꦁ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "tarung",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦴ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": "_ba",
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ꧀ꦧ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0205074_line9.jpg": {
+    "tokens": [
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wignyan",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦃ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": "cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲꦁ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦒ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "la",
+          "above": null,
+          "below": "_la",
+          "beside": null
+        },
+        "corrected_unicode": "ꦭ꧀ꦭ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ya",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦪ"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫꦶ"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ",
+        "sandh_unknown": true
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0205075_line6.jpg": {
+    "tokens": [
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "pa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦥ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ba",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦧꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": "pepet",
+          "below": "_wa",
+          "beside": null
+        },
+        "corrected_unicode": "ꦠꦼ꧀ꦮ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": "layar",
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦂꦸ"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "ma",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "da",
+          "above": "pepet",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦢꦼ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": "_ta",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ꧀ꦠ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0205079_line15.jpg": {
+    "tokens": [
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wignyan",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦃ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "nya",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦚ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "tarung",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦴ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "nya",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦚ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wignyan",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦃ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": "cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲꦁ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wignyan",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦃ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "la",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦭ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "tarung",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦴ"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "la",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦭ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦮ"
+      },
+      {
+        "status": "seg_error"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "seg_error"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wignyan",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦃ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": "pepet",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩꦼ"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "seg_error"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0205079_line20.jpg": {
+    "tokens": [
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "da",
+          "above": "cecak",
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦢꦁꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦒ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦠ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦮ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "da",
+          "above": "cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦢꦁ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦸ"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "ma",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wignyan",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦃ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0205080_line15.jpg": {
+    "tokens": [
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦠꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦮ"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": "_nga",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ꧀ꦔ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wa",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦮꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "_sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧀ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": "cecak",
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦒꦁꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦥ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦠ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦩꦸ"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0206091_line21.jpg": {
+    "tokens": [
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦱꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "la",
+          "above": null,
+          "below": "_la",
+          "beside": null
+        },
+        "corrected_unicode": "ꦭ꧀ꦭ"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "seg_error"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0206092_line7.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦠꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦮ"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "seg_error"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": "_wa",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ꧀ꦮ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "da",
+          "above": "wulu_cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦢꦷ"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ca",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦕ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "_ha",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧀ꦲ"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "nya",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦚ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0206093_line16.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "nga",
+          "above": null,
+          "below": "_na",
+          "beside": null
+        },
+        "corrected_unicode": "ꦔ꧀ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ba",
+          "above": null,
+          "below": "_na",
+          "beside": null
+        },
+        "corrected_unicode": "ꦧ꧀ꦤ"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": "wulu_cecak",
+          "below": "_ba",
+          "beside": null
+        },
+        "corrected_unicode": "ꦏꦷ꧀ꦧ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": null,
+          "below": "_ta",
+          "beside": null
+        },
+        "corrected_unicode": "ꦏ꧀ꦠ"
+      },
+      {
+        "status": "seg_error"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "_sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧀ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "la",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦭ"
+      },
+      {
+        "status": "unreviewed"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0206094_line0.jpg": {
+    "tokens": [
+      {
+        "status": "unreviewed"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0206094_line11.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": "wulu_cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦠꦷ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": "wulu_cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫꦷ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ya",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦪ"
+      },
+      {
+        "status": "unreviewed"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0207106_line13.jpg": {
+    "tokens": [
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦒ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "_sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧀ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩ"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦠ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "_sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧀ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pa",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦥꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lungsi",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧉"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0207107_line20.jpg": {
+    "tokens": [
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "unreviewed"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0207108_line18.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "la",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦭ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wignyan",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦃ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦥ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ya",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦪ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "tarung",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦴ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": "cecak",
+          "below": "_la",
+          "beside": null
+        },
+        "corrected_unicode": "ꦩꦁ꧀ꦭ"
+      },
+      {
+        "status": "seg_error"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "ga",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦒ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "tarung",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦴ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0207109_line16.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦏ"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "pa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦥ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": "pepet",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦒꦼ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "pa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦥ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "tarung",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦴ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦏ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦥ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "_sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧀ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lungsi",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧉"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0208118_line12.jpg": {
+    "tokens": [
+      {
+        "status": "unreviewed"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "nga",
+          "above": "wulu_cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦔꦷ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ja",
+          "above": "pepet_cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦗꦼꦁ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦒꦸ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": "wulu",
+          "below": "_ta",
+          "beside": null
+        },
+        "corrected_unicode": "ꦱꦶ꧀ꦠ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦥ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "nga",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦔ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": "wulu",
+          "below": "_da",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦶ꧀ꦢ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦥ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦠꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0208119_line14.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ca",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦕꦶ"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "ta",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦠ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "da",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦢ"
+      },
+      {
+        "status": "unknown"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wignyan",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦃ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 1
+  },
+  "d0208120_line18.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": "pepet",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦠꦼ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pa",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦥꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": "wulu_cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦷ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": "layar",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦩꦂ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦒ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ga",
+          "above": null,
+          "below": "suku",
+          "beside": null
+        },
+        "corrected_unicode": "ꦒꦸ"
+      }
+    ],
+    "missing_count": 1
+  },
+  "d0208121_line11.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": "cecak",
+          "below": "pengkal",
+          "beside": null
+        },
+        "corrected_unicode": "ꦩꦁꦾ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "tarung",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦴ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ta",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦠꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "da",
+          "above": "pepet",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦢꦼ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wignyan",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦃ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0209129_line10.jpg": {
+    "tokens": [
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "nga",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦔꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫ"
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": "_ya",
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ꧀ꦪ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": "pepet",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦼ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ma",
+          "above": null,
+          "below": "_ba",
+          "beside": null
+        },
+        "corrected_unicode": "ꦩ꧀ꦧ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "dha",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦝ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦏ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "tarung",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦴ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": "layar",
+          "below": "_ja",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦂ꧀ꦗ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": "wulu",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫꦶ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ra",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦫ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ha",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦲ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "nya",
+          "above": "cecak",
+          "below": "_ja",
+          "beside": null
+        },
+        "corrected_unicode": "ꦚꦁ꧀ꦗ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lungsi",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧉"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0209129_line2.jpg": {
+    "tokens": [
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "nga",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦔ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "wrong",
+        "corrected_labels": {
+          "base": "nga",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦔ",
+        "sandh_unknown": true
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "_pa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧀ꦥ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pa",
+          "above": null,
+          "below": "_ta",
+          "beside": null
+        },
+        "corrected_unicode": "ꦥ꧀ꦠ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "taling",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦺ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "na",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "ka",
+          "above": "cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦏꦁ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "wa",
+          "above": "cecak",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦮꦁ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "sa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦱ"
+      },
+      {
+        "status": "correct",
+        "corrected_labels": {
+          "base": "pada_lingsa",
+          "above": null,
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "꧈"
+      }
+    ],
+    "missing_count": 0
+  },
+  "d0209130_line2.jpg": {
+    "tokens": [
+      {
+        "corrected_labels": {
+          "above": null,
+          "base": "la",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦭ",
+        "status": "correct"
+      },
+      {
+        "corrected_labels": {
+          "above": "pepet_cecak",
+          "base": "na",
+          "below": "_ja",
+          "beside": null
+        },
+        "corrected_unicode": "ꦤꦼꦁ꧀ꦗ",
+        "status": "wrong"
+      },
+      {
+        "corrected_labels": {
+          "above": null,
+          "base": "pa",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦥ",
+        "status": "correct"
+      },
+      {
+        "corrected_labels": {
+          "above": null,
+          "base": "nga",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦔ",
+        "sandh_unknown": true,
+        "status": "wrong"
+      },
+      {
+        "corrected_labels": {
+          "above": null,
+          "base": "na",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦤ",
+        "status": "correct"
+      },
+      {
+        "status": "unreviewed"
+      },
+      {
+        "corrected_labels": {
+          "above": null,
+          "base": "wa",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦮ",
+        "status": "correct"
+      },
+      {
+        "corrected_labels": {
+          "above": null,
+          "base": "da",
+          "below": null,
+          "beside": null
+        },
+        "corrected_unicode": "ꦢ",
+        "status": "correct"
+      },
+      {
+        "status": "unreviewed"
+      }
+    ],
+    "missing_count": 0
+  }
+}

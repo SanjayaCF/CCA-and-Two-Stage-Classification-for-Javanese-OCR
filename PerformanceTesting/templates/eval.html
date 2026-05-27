@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Evaluasi OCR Aksara Jawa</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Javanese&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--green:#22c55e;--red:#ef4444;--orange:#f97316;--purple:#8b5cf6;--gray:#6b7280;--blue:#3b82f6;--border:#e2e8f0;--bg:#f1f5f9}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#1e293b}
+.java{font-family:'Noto Serif Javanese',serif}
+
+/* Header */
+.hdr{background:#fff;border-bottom:1px solid var(--border);padding:10px 20px;display:flex;align-items:center;gap:14px;position:sticky;top:0;z-index:100;box-shadow:0 1px 3px rgba(0,0,0,.06)}
+.hdr h1{font-size:15px;font-weight:600;flex:1}
+.prog-bar{height:6px;background:var(--border);border-radius:3px;width:180px;overflow:hidden}
+.prog-fill{height:100%;background:var(--blue);border-radius:3px;transition:width .3s}
+.prog-txt{font-size:12px;color:var(--gray);white-space:nowrap}
+
+/* Layout */
+.wrap{max-width:860px;margin:0 auto;padding:20px 14px 40px}
+
+/* Card */
+.card{background:#fff;border:1px solid var(--border);border-radius:8px;padding:14px;margin-bottom:14px}
+
+/* Image */
+.img-lbl{font-size:11px;color:var(--gray);font-weight:500;margin-bottom:6px}
+.line-img{width:100%;max-height:110px;object-fit:contain;object-position:left;background:#f8fafc;border:1px solid var(--border);border-radius:4px}
+
+/* Unicode output */
+.uni-out{text-align:center}
+.uni-big{font-size:44px;line-height:1.8;min-height:80px;word-break:break-all}
+.lat-sm{font-size:12px;color:var(--gray);margin-top:2px}
+
+/* Tokens */
+.tok-hdr{font-size:12px;font-weight:500;color:var(--gray);margin-bottom:10px}
+.tok-grid{display:flex;flex-wrap:wrap;gap:8px}
+.tok-card{border:2px solid var(--border);border-radius:8px;padding:7px;width:86px;display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;transition:border-color .15s;position:relative;user-select:none}
+.tok-card:hover{border-color:var(--blue)}
+.tok-card.correct{border-color:var(--green)}
+.tok-card.wrong{border-color:var(--orange)}
+.tok-card.seg_error{border-color:var(--red)}
+.tok-card.unknown{border-color:var(--purple)}
+.tok-crop{width:60px;height:44px;object-fit:contain;background:#f8fafc;border-radius:3px;border:1px solid var(--border)}
+.tok-uni{font-size:22px;line-height:1.6;min-height:36px;display:flex;align-items:center}
+.tok-lbl{font-size:9px;color:var(--gray);text-align:center;word-break:break-all}
+.badge{position:absolute;top:-8px;right:-8px;width:18px;height:18px;border-radius:50%;font-size:11px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700}
+.correct .badge{background:var(--green)}
+.wrong   .badge{background:var(--orange)}
+.seg_error .badge{background:var(--red)}
+.unknown .badge{background:var(--purple)}
+.no-crop{width:60px;height:44px;background:#f1f5f9;border-radius:3px}
+
+/* Missing counter */
+.miss-row{display:flex;align-items:center;gap:10px}
+.miss-lbl{font-size:13px;flex:1}
+.cnt-btn{width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:#fff;cursor:pointer;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center}
+.cnt-btn:hover{background:var(--bg)}
+.cnt-val{font-size:16px;font-weight:600;min-width:22px;text-align:center}
+
+/* Nav */
+.nav{display:flex;gap:8px;justify-content:space-between;align-items:center}
+.btn{padding:9px 18px;border-radius:6px;font-size:13px;font-weight:500;cursor:pointer;border:1px solid transparent;transition:all .15s}
+.btn:disabled{opacity:.4;cursor:default}
+.btn-pri{background:var(--blue);color:#fff;border-color:var(--blue)}
+.btn-pri:hover:not(:disabled){background:#2563eb}
+.btn-sec{background:#fff;color:#1e293b;border-color:var(--border)}
+.btn-sec:hover{background:var(--bg)}
+.btn-sm{font-size:12px;padding:7px 13px}
+
+/* Modal */
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;align-items:flex-start;justify-content:center;padding:20px;overflow-y:auto}
+.overlay.open{display:flex}
+.modal{background:#fff;border-radius:10px;padding:20px;max-width:620px;width:100%;margin:auto}
+.modal-hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.modal-ttl{font-size:15px;font-weight:600}
+.modal-x{background:none;border:none;font-size:22px;cursor:pointer;color:var(--gray);line-height:1;padding:0 4px}
+
+/* Crops in modal */
+.crops-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.crop-item{display:flex;flex-direction:column;align-items:center;gap:3px}
+.crop-item img{width:70px;height:54px;object-fit:contain;background:#f8fafc;border:1px solid var(--border);border-radius:4px}
+.crop-pos{font-size:10px;color:var(--gray)}
+
+/* Class selectors */
+.sel-sec{margin-bottom:10px}
+.sel-lbl{font-size:10px;font-weight:600;color:var(--gray);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.cls-grid{display:flex;flex-wrap:wrap;gap:4px}
+.cls-btn{padding:3px 6px;border-radius:4px;border:1px solid var(--border);background:#fff;cursor:pointer;display:flex;flex-direction:column;align-items:center;min-width:46px;transition:all .1s}
+.cls-btn:hover{border-color:var(--blue);background:#eff6ff}
+.cls-btn.sel{border-color:var(--blue);background:#dbeafe}
+.cls-btn .g{font-size:18px;line-height:1.7;min-height:30px;display:flex;align-items:center}
+.cls-btn .n{font-size:8px;color:var(--gray)}
+.none-btn{color:var(--gray);font-size:11px;height:46px;justify-content:center}
+
+/* Preview */
+.prev-box{background:#f8fafc;border:1px solid var(--border);border-radius:6px;padding:10px;text-align:center;margin:12px 0}
+.prev-uni{font-size:36px;line-height:1.8}
+.prev-lbl{font-size:11px;color:var(--gray);margin-top:2px}
+
+/* Modal actions */
+.modal-acts{display:flex;gap:6px;flex-wrap:wrap}
+.btn-apply{background:var(--blue);color:#fff}
+.btn-seг{background:#fee2e2;color:var(--red);border-color:#fca5a5}
+.btn-sandh{background:#fef3c7;color:#92400e;border-color:#fcd34d}
+.btn-sandh:disabled{opacity:.35;cursor:default}
+.btn-unk{background:#ede9fe;color:var(--purple);border-color:#c4b5fd}
+.btn-cancel{background:#fff;border-color:var(--border)}
+
+/* Summary */
+.met-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:14px 0}
+.met-box{background:#f8fafc;border-radius:6px;padding:14px;text-align:center}
+.met-val{font-size:28px;font-weight:700;color:var(--blue)}
+.met-name{font-size:12px;color:var(--gray);margin-top:3px}
+.tbl{width:100%;font-size:12px;border-collapse:collapse;margin-bottom:14px}
+.tbl td{padding:5px 0;border-bottom:1px solid #f1f5f9}
+
+/* Loading / error */
+.loading{text-align:center;padding:48px;color:var(--gray)}
+.spin{width:30px;height:30px;border:3px solid var(--border);border-top-color:var(--blue);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 10px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.err-box{background:#fee2e2;border-radius:8px;padding:14px;color:var(--red);text-align:center;margin-bottom:14px}
+</style>
+</head>
+<body>
+
+<div class="hdr">
+  <h1>Evaluasi OCR Aksara Jawa</h1>
+  <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+  <div class="prog-txt" id="progTxt">0 / 0</div>
+  <button class="btn btn-sec btn-sm" onclick="showSummary()">Ringkasan</button>
+</div>
+
+<div class="wrap">
+  <div id="main"><div class="loading"><div class="spin"></div>Memuat...</div></div>
+</div>
+
+<!-- Modal koreksi -->
+<div class="overlay" id="overlay">
+<div class="modal">
+  <div class="modal-hdr">
+    <div class="modal-ttl">Koreksi Unit Aksara</div>
+    <button class="modal-x" onclick="closeModal()">×</button>
+  </div>
+
+  <div class="crops-row" id="mCrops"></div>
+
+  <div class="sel-sec">
+    <div class="sel-lbl">Aksara Dasar</div>
+    <div class="cls-grid" id="baseGrid"></div>
+  </div>
+
+  <div id="sandhSec">
+    <div class="sel-sec">
+      <div class="sel-lbl">Sandhangan Atas</div>
+      <div class="cls-grid" id="aboveGrid"></div>
+    </div>
+    <div class="sel-sec">
+      <div class="sel-lbl">Sandhangan Bawah</div>
+      <div class="cls-grid" id="belowGrid"></div>
+    </div>
+    <div class="sel-sec">
+      <div class="sel-lbl">Sandhangan Samping</div>
+      <div class="cls-grid" id="besideGrid"></div>
+    </div>
+  </div>
+
+  <div class="prev-box">
+    <div class="prev-uni java" id="prevUni">—</div>
+    <div class="prev-lbl" id="prevLbl">pilih aksara dasar</div>
+  </div>
+
+  <div class="modal-acts">
+    <button class="btn btn-apply btn-sm" onclick="applyCorrection()">Terapkan Koreksi</button>
+    <button class="btn btn-seг btn-sm" onclick="applySegError()">Kesalahan Segmentasi</button>
+    <button class="btn btn-sandh btn-sm" onclick="applySandhUnknown()" id="btnSandhUnk" title="Base benar, sandhangan di luar kelas yang dilatih">Sandhangan Tidak Dikenal</button>
+    <button class="btn btn-unk btn-sm" onclick="applyUnknown()">Kelas Tidak Dikenal</button>
+    <button class="btn btn-cancel btn-sm" onclick="closeModal()">Batal</button>
+  </div>
+</div>
+</div>
+
+<script>
+// ── Data Unicode ──────────────────────────────────────────────────────────────
+const BASE_CLS=[["ha","ꦲ"],["na","ꦤ"],["ca","ꦕ"],["ra","ꦫ"],["ka","ꦏ"],
+  ["da","ꦢ"],["ta","ꦠ"],["sa","ꦱ"],["wa","ꦮ"],["la","ꦭ"],
+  ["pa","ꦥ"],["dha","ꦝ"],["ja","ꦗ"],["ya","ꦪ"],["nya","ꦚ"],
+  ["ma","ꦩ"],["ga","ꦒ"],["ba","ꦧ"],["nga","ꦔ"],
+  ["taling","ꦺ"],["tarung","ꦴ"],["wignyan","ꦃ"],
+  ["pada_lingsa","꧈"],["pada_lungsi","꧉"],
+  ["_ha","꧀ꦲ"],["_pa","꧀ꦥ"],["_sa","꧀ꦱ"]];
+const ABOVE_CLS=[["wulu","ꦶ"],["wulu_cecak","ꦷ"],["wulu_layar","ꦶꦂ"],["pepet","ꦼ"],["pepet_cecak","ꦼꦁ"],["pepet_layar","ꦼꦂ"],["cecak","ꦁ"],["layar","ꦂ"]];
+const BELOW_CLS=[["suku","ꦸ"],["pengkal","ꦾ"],
+  ["_ba","꧀ꦧ"],["_ca","꧀ꦕ"],["_da","꧀ꦢ"],["_dha","꧀ꦝ"],["_ja","꧀ꦗ"],["_ka","꧀ꦏ"],
+  ["_la","꧀ꦭ"],["_na","꧀ꦤ"],["_nga","꧀ꦔ"],["_ta","꧀ꦠ"],["_wa","꧀ꦮ"],["_ya","꧀ꦪ"]];
+const BESIDE_CLS=[["pangkon","꧀"]];
+
+const BU=Object.fromEntries(BASE_CLS);
+const AU=Object.fromEntries(ABOVE_CLS);
+const LU=Object.fromEntries(BELOW_CLS);
+const SU=Object.fromEntries(BESIDE_CLS);
+const ATOMIC=new Set(["taling","tarung","wignyan","pada_lingsa","pada_lungsi","_ha","_pa","_sa"]);
+
+function compose(base,above,below,beside){
+  const bu=BU[base];if(!bu)return'';
+  let u=bu;
+  if(above&&AU[above])u+=AU[above];
+  if(below&&LU[below])u+=LU[below];
+  if(beside&&SU[beside])u+=SU[beside];
+  return u;
+}
+
+// ── State ─────────────────────────────────────────────────────────────────────
+const S={
+  idx:    {{ start_idx }},
+  total:  {{ total }},
+  reviewed: {{ reviewed }},
+  data:   null,
+  reviews:[],   // per-token: {status, corrected_labels, corrected_unicode}
+  missing:0,
+  mIdx:   -1,   // modal token index
+  mBase:null, mAbove:null, mBelow:null, mBeside:null,
+};
+
+// ── Load image ─────────────────────────────────────────────────────────────────
+async function loadImage(idx){
+  setMain(`<div class="loading"><div class="spin"></div>Memproses gambar…</div>`);
+  try{
+    const r=await fetch(`/api/image/${idx}`);
+    const d=await r.json();
+    S.idx=idx; S.data=d;
+    if(d.review){
+      S.reviews=d.review.tokens||[];
+      S.missing=d.review.missing_count||0;
+    } else {
+      S.reviews=(d.tokens||[]).map(()=>({status:'unreviewed'}));
+      S.missing=0;
+    }
+    updateProg();
+    render(d);
+  } catch(e){
+    setMain(`<div class="err-box">Error: ${e.message}</div>`);
+  }
+}
+
+// ── Render ────────────────────────────────────────────────────────────────────
+function setMain(html){document.getElementById('main').innerHTML=html;}
+
+function render(d){
+  if(d.error){
+    setMain(`<div class="err-box">${d.error}</div>${navHtml()}`);
+    return;
+  }
+  const done=S.reviews.filter(t=>t.status!=='unreviewed').length;
+  const tot =S.reviews.length;
+  setMain(`
+    <div class="card">
+      <div class="img-lbl">${d.image} — ${d.idx+1} dari ${d.total}</div>
+      <img class="line-img" src="/static/test_images/${encodeURIComponent(d.image)}" alt="baris">
+    </div>
+    <div class="card uni-out">
+      <div class="uni-big java">${d.final_unicode||'(kosong)'}</div>
+      <div class="lat-sm">${d.final_latin||''}</div>
+    </div>
+    <div class="card">
+      <div class="tok-hdr" id="tokHdr">Unit Aksara — ${done}/${tot} dikonfirmasi${done===tot&&tot>0?' <span style="color:var(--green)">✓ Semua selesai</span>':''}</div>
+      <div class="tok-grid" id="tokGrid">${tokCards(d.tokens||[])}</div>
+    </div>
+    <div class="card miss-row">
+      <div class="miss-lbl">Karakter yang tidak terdeteksi pipeline (lewati / under-segmentasi):</div>
+      <button class="cnt-btn" onclick="chMiss(-1)">−</button>
+      <div class="cnt-val" id="missVal">${S.missing}</div>
+      <button class="cnt-btn" onclick="chMiss(1)">+</button>
+    </div>
+    ${navHtml()}
+  `);
+}
+
+function tokCards(tokens){
+  if(!tokens.length) return '<div style="font-size:12px;color:var(--gray)">Tidak ada unit aksara terdeteksi.</div>';
+  return tokens.map((t,i)=>{
+    const rv=S.reviews[i]||{status:'unreviewed'};
+    const st=rv.status;
+    const uni=(st==='wrong'&&rv.corrected_unicode)?rv.corrected_unicode:(t.unicode||'?');
+    const crop=t.crops&&t.crops.base?`<img class="tok-crop" src="${t.crops.base}" alt="crop">`:`<div class="no-crop"></div>`;
+    const badge={correct:'✓',wrong:'✗',seg_error:'⚠',unknown:'?'}[st]||'';
+    return `<div class="tok-card ${st}" onclick="openModal(${i})">${crop}
+      <div class="tok-uni java">${uni}</div>
+      <div class="tok-lbl">${t.labels&&t.labels.base?t.labels.base:'—'}</div>
+      ${badge?`<div class="badge">${badge}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function navHtml(){
+  const first=S.idx===0, last=S.idx>=S.total-1;
+  return `<div class="nav">
+    <button class="btn btn-sec" onclick="nav(-1)" ${first?'disabled':''}>← Sebelumnya</button>
+    <button class="btn btn-pri" onclick="saveAndNav()">${last?'Simpan & Selesai':'Simpan & Lanjut →'}</button>
+  </div>`;
+}
+
+function updateProg(){
+  const pct=S.total>0?(S.reviewed/S.total)*100:0;
+  document.getElementById('progFill').style.width=pct+'%';
+  document.getElementById('progTxt').textContent=`${S.reviewed} / ${S.total}`;
+}
+
+// ── Navigation ─────────────────────────────────────────────────────────────────
+function nav(d){const n=S.idx+d;if(n>=0&&n<S.total)loadImage(n);}
+
+async function saveAndNav(){
+  await saveReview();
+  if(S.idx<S.total-1) loadImage(S.idx+1);
+  else showSummary();
+}
+
+async function saveReview(){
+  if(!S.data||!S.data.image) return;
+  await fetch('/api/save',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({image:S.data.image,review:{tokens:S.reviews,missing_count:S.missing}}),
+  });
+  const r=await fetch('/api/summary');
+  const d=await r.json();
+  S.reviewed=d.reviewed;
+  updateProg();
+}
+
+function chMiss(d){
+  S.missing=Math.max(0,S.missing+d);
+  const el=document.getElementById('missVal');
+  if(el) el.textContent=S.missing;
+}
+
+// ── Modal ──────────────────────────────────────────────────────────────────────
+function openModal(i){
+  S.mIdx=i;
+  const t=S.data.tokens[i];
+  const rv=S.reviews[i]||{};
+  const lbl=(rv.status==='wrong'&&rv.corrected_labels)?rv.corrected_labels:(t.labels||{});
+  S.mBase=lbl.base||null; S.mAbove=lbl.above||null;
+  S.mBelow=lbl.below||null; S.mBeside=lbl.beside||null;
+
+  // Crops
+  const crops=t.crops||{};
+  const pos=[['base','Dasar'],['above','Atas'],['below','Bawah'],['beside','Samping']];
+  document.getElementById('mCrops').innerHTML=pos.filter(([p])=>crops[p])
+    .map(([p,lb])=>`<div class="crop-item"><img src="${crops[p]}" alt="${lb}"><div class="crop-pos">${lb}</div></div>`).join('');
+
+  rebuildModal();
+  document.getElementById('overlay').classList.add('open');
+}
+
+function closeModal(){
+  document.getElementById('overlay').classList.remove('open');
+  S.mIdx=-1;
+}
+
+function rebuildModal(){
+  renderBaseGrid();
+  renderSandhGrids();
+  updatePrev();
+}
+
+function clsBtns(list,selVal,onClick){
+  const none=`<button class="cls-btn none-btn${!selVal?' sel':''}" onclick="${onClick}(null)">—</button>`;
+  return none+list.map(([l,g])=>`<button class="cls-btn${selVal===l?' sel':''}" onclick="${onClick}('${l}')">
+    <span class="g java">${g}</span><span class="n">${l}</span></button>`).join('');
+}
+
+function renderBaseGrid(){
+  const none=`<button class="cls-btn none-btn${!S.mBase?' sel':''}" onclick="selBase(null)">—</button>`;
+  document.getElementById('baseGrid').innerHTML=none+BASE_CLS.map(([l,g])=>
+    `<button class="cls-btn${S.mBase===l?' sel':''}" onclick="selBase('${l}')">
+      <span class="g java">${g}</span><span class="n">${l}</span></button>`).join('');
+}
+
+function renderSandhGrids(){
+  const atomic=S.mBase&&ATOMIC.has(S.mBase);
+  document.getElementById('sandhSec').style.display=atomic?'none':'';
+  if(atomic) return;
+  document.getElementById('aboveGrid').innerHTML=clsBtns(ABOVE_CLS,S.mAbove,'selAbove');
+  document.getElementById('belowGrid').innerHTML=clsBtns(BELOW_CLS,S.mBelow,'selBelow');
+  document.getElementById('besideGrid').innerHTML=clsBtns(BESIDE_CLS,S.mBeside,'selBeside');
+}
+
+function selBase(l){
+  S.mBase=l;
+  if(l&&ATOMIC.has(l)){S.mAbove=S.mBelow=S.mBeside=null;}
+  rebuildModal();
+}
+function selAbove(l){S.mAbove=l;rebuildModal();}
+function selBelow(l){S.mBelow=l;rebuildModal();}
+function selBeside(l){S.mBeside=l;rebuildModal();}
+
+function updatePrev(){
+  const u=S.mBase?compose(S.mBase,S.mAbove,S.mBelow,S.mBeside):'';
+  document.getElementById('prevUni').textContent=u||'—';
+  const parts=[S.mBase,S.mAbove,S.mBelow,S.mBeside].filter(Boolean);
+  document.getElementById('prevLbl').textContent=parts.join(' + ')||'pilih aksara dasar';
+  const btn=document.getElementById('btnSandhUnk');
+  if(btn) btn.disabled=!S.mBase||ATOMIC.has(S.mBase);
+}
+
+function applyCorrection(){
+  if(!S.mBase||S.mIdx<0) return;
+  const cl={base:S.mBase,above:S.mAbove,below:S.mBelow,beside:S.mBeside};
+  const cu=compose(S.mBase,S.mAbove,S.mBelow,S.mBeside);
+  const orig=S.data.tokens[S.mIdx].unicode;
+  S.reviews[S.mIdx]={status:cu===orig?'correct':'wrong',corrected_labels:cl,corrected_unicode:cu};
+  closeModal();
+  refreshGrid();
+}
+function applySegError(){
+  if(S.mIdx<0)return;
+  S.reviews[S.mIdx]={status:'seg_error'};
+  closeModal(); refreshGrid();
+}
+function applySandhUnknown(){
+  if(S.mIdx<0||!S.mBase)return;
+  const cl={base:S.mBase,above:null,below:null,beside:null};
+  const cu=BU[S.mBase]||'';
+  S.reviews[S.mIdx]={status:'wrong',corrected_labels:cl,corrected_unicode:cu,sandh_unknown:true};
+  closeModal(); refreshGrid();
+}
+function applyUnknown(){
+  if(S.mIdx<0)return;
+  S.reviews[S.mIdx]={status:'unknown'};
+  closeModal(); refreshGrid();
+}
+
+function refreshGrid(){
+  const g=document.getElementById('tokGrid');
+  if(g&&S.data) g.innerHTML=tokCards(S.data.tokens||[]);
+  const done=S.reviews.filter(t=>t.status!=='unreviewed').length;
+  const tot =S.reviews.length;
+  const hdr=document.getElementById('tokHdr');
+  if(hdr) hdr.innerHTML=`Unit Aksara — ${done}/${tot} dikonfirmasi${done===tot&&tot>0?' <span style="color:var(--green)">✓ Semua selesai</span>':''}`;
+}
+
+// ── Summary ────────────────────────────────────────────────────────────────────
+async function showSummary(){
+  setMain(`<div class="loading"><div class="spin"></div>Menghitung…</div>`);
+  const r=await fetch('/api/summary');
+  const d=await r.json();
+  setMain(`
+    <div class="card">
+      <h2 style="font-size:17px;font-weight:600;margin-bottom:3px">Ringkasan Evaluasi</h2>
+      <p style="color:var(--gray);font-size:12px;margin-bottom:14px">${d.reviewed}/${d.total_images} gambar telah ditinjau</p>
+      <div class="met-grid">
+        <div class="met-box"><div class="met-val">${d.segmentation_accuracy}%</div><div class="met-name">Akurasi Segmentasi</div></div>
+        <div class="met-box"><div class="met-val">${d.recognition_accuracy}%</div><div class="met-name">Akurasi Pengenalan Karakter</div></div>
+        <div class="met-box"><div class="met-val">${d.end_to_end_accuracy}%</div><div class="met-name">Akurasi End-to-End</div></div>
+        <div class="met-box"><div class="met-val">${d.over_segmentation_rate}%</div><div class="met-name">Tingkat Over-Segmentasi</div></div>
+      </div>
+      <table class="tbl">
+        <tr style="color:var(--gray)"><td>Kategori</td><td style="text-align:right">Jumlah</td></tr>
+        <tr><td>✓ Benar (segmentasi + label tepat)</td><td style="text-align:right;color:var(--green)">${d.correct}</td></tr>
+        <tr><td>✗ Label salah (segmentasi benar)</td><td style="text-align:right;color:var(--orange)">${d.wrong}</td></tr>
+        <tr><td>⚠ Kesalahan segmentasi (komponen lebih)</td><td style="text-align:right;color:var(--red)">${d.seg_errors}</td></tr>
+        <tr><td>? Kelas tidak dikenal</td><td style="text-align:right;color:var(--purple)">${d.unknown}</td></tr>
+        <tr><td>Karakter tidak terdeteksi (komponen kurang)</td><td style="text-align:right;color:var(--gray)">${d.missing}</td></tr>
+        <tr style="font-weight:600"><td>Total Ground Truth</td><td style="text-align:right">${d.gt_total}</td></tr>
+      </table>
+      <button class="btn btn-pri btn-sm" onclick="loadImage(S.idx)">← Kembali ke Review</button>
+    </div>
+  `);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+loadImage(S.idx);
+</script>
+</body>
+</html>
