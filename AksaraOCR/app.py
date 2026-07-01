@@ -4,17 +4,16 @@ import importlib.util
 from flask import Flask, render_template, request, jsonify
 from werkzeug.utils import secure_filename
 
-# Load density_processing_v2 directly by file path so it never conflicts
-# with the local processing/ package.
-_DP_PATH = os.path.normpath(os.path.join(
-    os.path.dirname(os.path.abspath(__file__)), "..", "Kerja Praktik", "density_processing_v2.py"
-))
-_spec = importlib.util.spec_from_file_location("density_processing_v2", _DP_PATH)
-_mod  = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(_mod)
-process_image_density_guided = _mod.process_image_density_guided
 
-from processing import stage1, stage2, composition
+# _DP_PATH = os.path.normpath(os.path.join(
+#     os.path.dirname(os.path.abspath(__file__)), "/","processing", "density_processing.py"
+# ))
+# _spec = importlib.util.spec_from_file_location("density_processing")
+# _mod  = importlib.util.module_from_spec(_spec)
+# _spec.loader.exec_module(_mod)
+# process_image_density_guided = _mod.process_image_density_guided
+
+from processing import stage1, stage2, composition, density_processing
 
 app = Flask(__name__)
 app.config["MAX_CONTENT_LENGTH"] = 16 * 1024 * 1024
@@ -47,7 +46,7 @@ def _allowed(filename):
 
 
 def _run(input_path, params):
-    seg = process_image_density_guided(input_path, RESULT_FOLDER, **params)
+    seg = density_processing.process_image_density_guided(input_path, RESULT_FOLDER, **params)
     if not seg:
         return None
 
